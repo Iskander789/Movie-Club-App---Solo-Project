@@ -25,6 +25,9 @@ app.use(passport.session());
 // Routes
 app.use('/api/user', userRouter);
 
+console.log(`Server session secret: ${process.env.SERVER_SESSION_SECRET}`);
+console.log(`Server running on port: ${PORT}`);
+
 // Listen Server & Port
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
