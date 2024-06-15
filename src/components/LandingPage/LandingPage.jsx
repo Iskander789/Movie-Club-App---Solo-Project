@@ -20,35 +20,36 @@ function LandingPage() {
       <div className="grid">
         <div className="grid-col grid-col_8">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
+            Welcome to the Movie Club App! This platform is designed to bring friends together in small movie clubs to discuss films on a bimonthly basis. Whether you're a casual moviegoer or a dedicated cinephile, our app provides the perfect environment for sharing your thoughts and opinions on the latest releases and classic films alike.
           </p>
 
           <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
+            Here are some of the key features of the Movie Club App:
           </p>
 
+          <ul>
+            <li>
+              <strong>Create or Join Clubs:</strong> Easily create a new movie club or join an existing one with your friends. Each club can have up to four members, ensuring intimate and engaging discussions.
+            </li>
+            <li>
+              <strong>Movie Discussions:</strong> Participate in discussions about the selected movie for the bimonthly period. Share your insights, favorite scenes, and critiques with other club members.
+            </li>
+            <li>
+              <strong>Rate and Review:</strong> Rate each movie and leave detailed reviews to help others decide what to watch next.
+            </li>
+            <li>
+              <strong>Watchlist Management:</strong> Keep track of movies you want to watch and those you've already seen with our built-in watchlist feature.
+            </li>
+            <li>
+              <strong>Notifications and Reminders:</strong> Stay up-to-date with club activities through notifications and reminders about upcoming discussions and movie selections.
+            </li>
+            <li>
+              <strong>Integrations:</strong> Seamlessly integrate with popular movie databases to fetch information about movies, including synopses, cast details, and trailers.
+            </li>
+          </ul>
+
           <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
+            Join the Movie Club App today and start enjoying movies with friends like never before!
           </p>
         </div>
         <div className="grid-col grid-col_4">
