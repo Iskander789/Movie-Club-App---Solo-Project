@@ -5,10 +5,8 @@ Grid
 .grid {
   display: flex;
   flex: 0 1 auto;
-  /* defaults to 'row' */
   flex-direction: row;
   flex-wrap: wrap;
-  /* defaults to 'flex-start' */
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -77,4 +75,51 @@ Grid
 .grid-col_12 {
   flex-basis: 100%;
   max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------------
+Landing Page
+-------------------------------------------------------------------------------- */
+
+.container {
+  background-color: #2a2a2a;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #f0f0f0;
+}
+
+h2 {
+  color: #ffd700;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+button.btn_sizeSm {
+  background-color: #ffd700;
+  color: #1c1c1c;
+  border: 2px solid #ffd700;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+button.btn_sizeSm:hover {
+  background-color: #e6c200;
+  border-color: #e6c200;
+  color: #1c1c1c;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
 }
