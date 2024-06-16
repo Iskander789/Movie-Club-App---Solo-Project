@@ -1,0 +1,11 @@
+.container {
+    padding: 20px;
+  }
+  
+  .profile-picture {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+  }
+  

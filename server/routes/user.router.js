@@ -3,13 +3,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const multer = require('multer');
 
 const router = express.Router();
-
-// Handles Ajax request for user information if user is authenticated
-router.get('/', rejectUnauthenticated, (req, res) => {
-  res.send(req.user);
-});
 
 // Handles POST request with new user data
 router.post('/register', (req, res, next) => {
@@ -36,6 +32,52 @@ router.post('/logout', (req, res, next) => {
     if (err) { return next(err); }
     res.sendStatus(200);
   });
+});
+
+// Get user profile
+router.get('/profile', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT username, email, profile_picture, group_name, is_leader FROM "user" WHERE id = $1`;
+  pool.query(queryText, [req.user.id])
+    .then(result => res.send(result.rows[0]))
+    .catch(err => {
+      console.log('Error getting user profile:', err);
+      res.sendStatus(500);
+    });
+});
+
+// Update user profile
+router.put('/profile', rejectUnauthenticated, (req, res) => {
+  const { username, email, group_name } = req.body;
+  const queryText = `UPDATE "user" SET username = $1, email = $2, group_name = $3 WHERE id = $4`;
+  pool.query(queryText, [username, email, group_name, req.user.id])
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log('Error updating user profile:', err);
+      res.sendStatus(500);
+    });
+});
+
+// File upload setup
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${req.user.id}-${Date.now()}-${file.originalname}`)
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Upload profile picture
+router.post('/profile_picture', rejectUnauthenticated, upload.single('profile_picture'), (req, res) => {
+  const queryText = `UPDATE "user" SET profile_picture = $1 WHERE id = $2`;
+  pool.query(queryText, [req.file.path, req.user.id])
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log('Error uploading profile picture:', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

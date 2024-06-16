@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -15,14 +14,14 @@ function LoginForm() {
       dispatch({
         type: 'LOGIN',
         payload: {
-          username: username,
-          password: password,
+          username,
+          password,
         },
       });
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  }; // end login
+  };
 
   return (
     <form className="formPanel" onSubmit={login}>

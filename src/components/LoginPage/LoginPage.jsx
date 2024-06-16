@@ -1,14 +1,18 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
-import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function LoginPage() {
-  const history = useHistory();
+  const user = useSelector((store) => store.user);
+
+  if (user.id) {
+    return <Redirect to="/user" />;
+  }
 
   return (
     <div>
       <LoginForm />
-
       <center>
         <button
           type="button"
