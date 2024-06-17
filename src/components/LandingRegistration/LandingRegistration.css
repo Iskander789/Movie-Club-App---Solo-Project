@@ -1,54 +1,62 @@
 .container {
-    padding: 20px;
-  }
-  
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .grid-col_8 {
-    flex: 0 0 66.6667%;
-    max-width: 66.6667%;
-  }
-  
-  .grid-col_4 {
-    flex: 0 0 33.3333%;
-    max-width: 33.3333%;
-    padding: 20px;
-  }
-  
-  .formPanel {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .btn {
-    background-color: #ffd700;
-    color: #1c1c1c;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #e6c300;
-  }
-  
-  .btn_asLink {
-    background: none;
-    color: #ffd700;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  .btn_sizeSm {
-    padding: 5px 10px;
-  }
-  
+  padding: 20px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+}
+
+.grid-col_8 {
+  flex: 8;
+  color: #f2f2f2; /* Light grey color for better readability */
+}
+
+.grid-col_4 {
+  flex: 4;
+}
+
+.formPanel {
+  background: #1c1c1c; /* Dark background for form to match the overall theme */
+  color: #f2f2f2; /* Light grey color for form text */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  color: #ffd700; /* Gold color for heading */
+}
+
+p {
+  color: #f2f2f2; /* Light grey color for paragraph text */
+}
+
+ul {
+  padding-left: 20px;
+  color: #f2f2f2; /* Light grey color for list items */
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+.btn {
+  background-color: #1c1c1c;
+  color: #ffd700;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #ffd700;
+  color: #1c1c1c;
+}
+
+.btn_sizeSm {
+  padding: 8px 16px;
+}
