@@ -1,15 +1,11 @@
-import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
 
-// worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
+    const response = yield axios.get('/api/user/profile', {
       withCredentials: true,
-    };
-
-    const response = yield axios.get('/api/user/profile', config);
+    });
 
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {

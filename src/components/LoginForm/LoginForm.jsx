@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function LoginForm() {
@@ -6,6 +6,11 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setUsername('');
+    setPassword('');
+  }, []);
 
   const login = (event) => {
     event.preventDefault();
@@ -24,7 +29,7 @@ function LoginForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={login}>
+    <form className="formPanel" onSubmit={login} autoComplete="off">
       <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -40,6 +45,7 @@ function LoginForm() {
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
+            autoComplete="off"
           />
         </label>
       </div>
@@ -52,6 +58,7 @@ function LoginForm() {
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            autoComplete="new-password"
           />
         </label>
       </div>

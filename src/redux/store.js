@@ -1,17 +1,18 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
-import rootReducer from './reducers/_root.reducer';
-import rootSaga from './sagas/_root.saga';
+import rootReducer from './reducers/_root.reducer'; // imports ./_root.reducer.js
+import rootSaga from './sagas/_root.saga'; // imports ./_root.saga.js
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewareList = process.env.NODE_ENV === 'development' ? [sagaMiddleware, logger] : [sagaMiddleware];
+// this line sets up Redux DevTools, if available
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(...middlewareList),
+  composeEnhancers(applyMiddleware(sagaMiddleware, logger)),
 );
 
 sagaMiddleware.run(rootSaga);

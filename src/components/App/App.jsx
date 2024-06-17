@@ -26,6 +26,7 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
+  const redirect = useSelector(store => store.redirect);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -47,7 +48,7 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
           <Route exact path="/login">
-            {user.id ? <Redirect to="/user" /> : <LoginPage />}
+            {user.id ? <Redirect to={redirect || '/user'} /> : <LoginPage />}
           </Route>
           <Route exact path="/registration">
             {user.id ? <Redirect to="/user" /> : <RegisterPage />}
