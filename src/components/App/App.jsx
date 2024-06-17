@@ -1,11 +1,12 @@
-// src/components/App/App.jsx
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -18,8 +19,9 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(store => store.user);
-  const redirect = useSelector(store => store.redirect);
+  const user = useSelector((store) => store.user);
+  const redirect = useSelector((store) => store.redirect);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -27,46 +29,50 @@ function App() {
 
   useEffect(() => {
     if (redirect) {
-      window.location.href = redirect;
+      history.push(redirect);
       dispatch({ type: 'CLEAR_REDIRECT' });
     }
-  }, [redirect, dispatch]);
+  }, [redirect, history, dispatch]);
 
   return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Redirect exact from="/" to="/home" />
-          <Route exact path="/about">
-            <AboutPage />
-          </Route>
-          <ProtectedRoute exact path="/user">
-            <UserPage />
-          </ProtectedRoute>
-          <ProtectedRoute exact path="/info">
-            <InfoPage />
-          </ProtectedRoute>
-          <Route exact path="/login">
-            {user.id ? <Redirect to="/user" /> : <LoginPage />}
-          </Route>
-          <Route exact path="/registration">
-            {user.id ? <Redirect to="/user" /> : <RegisterPage />}
-          </Route>
-          <Route exact path="/home">
-            {user.id ? <Redirect to="/user" /> : <LandingPage />}
-          </Route>
-          <ProtectedRoute exact path="/profile">
-            <UserProfile />
-          </ProtectedRoute>
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+    <div>
+      <Nav />
+      <Switch>
+        <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
+        <ProtectedRoute exact path="/about">
+          <AboutPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/home">
+          <UserPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/info">
+          <InfoPage />
+        </ProtectedRoute>
+        <Route exact path="/login">
+          {user.id ? <Redirect to="/home" /> : <LoginPage />}
+        </Route>
+        <Route exact path="/registration">
+          {user.id ? <Redirect to="/home" /> : <RegisterPage />}
+        </Route>
+        <Route exact path="/landing">
+          {user.id ? <Redirect to="/home" /> : <LandingPage />}
+        </Route>
+        <ProtectedRoute exact path="/profile">
+          <UserProfile />
+        </ProtectedRoute>
+        <Route>
+          <h1>404</h1>
+        </Route>
+      </Switch>
+      <Footer />
+    </div>
   );
 }
 
-export default App;
+export default function AppWithRouter() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}

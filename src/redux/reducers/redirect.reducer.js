@@ -1,4 +1,3 @@
-// src/redux/reducers/redirect.reducer.js
 const redirectReducer = (state = '', action) => {
     switch (action.type) {
       case 'REDIRECT':
