@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
@@ -6,6 +6,14 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+
+  // Reset form fields when the component is unmounted
+  useEffect(() => {
+    return () => {
+      setUsername('');
+      setPassword('');
+    };
+  }, []);
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -17,7 +25,11 @@ function RegisterForm() {
         password: password,
       },
     });
-  }; // end registerUser
+
+    // Clear form fields after submission
+    setUsername('');
+    setPassword('');
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
