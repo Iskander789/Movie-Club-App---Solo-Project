@@ -1,18 +1,11 @@
+// src/components/App/App.jsx
 import React, { useEffect } from 'react';
-import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
-
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -32,6 +25,13 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  useEffect(() => {
+    if (redirect) {
+      window.location.href = redirect;
+      dispatch({ type: 'CLEAR_REDIRECT' });
+    }
+  }, [redirect, dispatch]);
+
   return (
     <Router>
       <div>
@@ -48,7 +48,7 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
           <Route exact path="/login">
-            {user.id ? <Redirect to={redirect || '/user'} /> : <LoginPage />}
+            {user.id ? <Redirect to="/user" /> : <LoginPage />}
           </Route>
           <Route exact path="/registration">
             {user.id ? <Redirect to="/user" /> : <RegisterPage />}

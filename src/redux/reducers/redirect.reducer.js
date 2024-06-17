@@ -1,6 +1,7 @@
+// src/redux/reducers/redirect.reducer.js
 const redirectReducer = (state = '', action) => {
     switch (action.type) {
-      case 'SET_REDIRECT':
+      case 'REDIRECT':
         return action.payload;
       case 'CLEAR_REDIRECT':
         return '';
