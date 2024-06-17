@@ -1,44 +1,51 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import './Nav.css';
 
 function Nav() {
-  const user = useSelector((store) => store.user);
   const location = useLocation();
+  const user = useSelector((state) => state.user);
+
+  const isLoggedIn = Boolean(user.id);
 
   return (
-    <div className="nav">
-      <Link to={user.id ? "/home" : "/landing"}>
-        <h2 className="nav-title">Movie Club</h2>
-      </Link>
-      <div>
-        {!user.id && (
-          <>
-            <Link className="navLink" to="/login">
-              Login / Register
-            </Link>
-          </>
+    <nav className="nav">
+      <div className="nav-title">Movie Club</div>
+      <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
+        {!isLoggedIn && location.pathname !== '/' && (
+          <li>
+            <Link to="/" className="navLink">Landing</Link>
+          </li>
         )}
-        {user.id && (
-          <>
-            {location.pathname !== '/home' && (
-              <Link className="navLink" to="/home">
-                Home
-              </Link>
-            )}
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-            <Link className="navLink" to="/about">
-              About
-            </Link>
-            <LogOutButton className="navLink" />
-          </>
+        {isLoggedIn && location.pathname !== '/home' && (
+          <li>
+            <Link to="/home" className="navLink">Home</Link>
+          </li>
         )}
-      </div>
-    </div>
+        {isLoggedIn && location.pathname !== '/info' && (
+          <li>
+            <Link to="/info" className="navLink">Info Page</Link>
+          </li>
+        )}
+        {isLoggedIn && location.pathname !== '/about' && (
+          <li>
+            <Link to="/about" className="navLink">About</Link>
+          </li>
+        )}
+        {isLoggedIn ? (
+          <li>
+            <Link to="/logout" className="navLink">Log Out</Link>
+          </li>
+        ) : (
+          location.pathname !== '/login' && (
+            <li>
+              <Link to="/login" className="navLink">Login</Link>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
   );
 }
 
