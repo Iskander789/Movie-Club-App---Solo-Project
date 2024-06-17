@@ -10,9 +10,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
 import UserProfile from '../UserProfile/UserProfile';
 
 import './App.css';
@@ -51,11 +50,8 @@ function App() {
         <Route exact path="/login">
           {user.id ? <Redirect to="/home" /> : <LoginPage />}
         </Route>
-        <Route exact path="/registration">
-          {user.id ? <Redirect to="/home" /> : <RegisterPage />}
-        </Route>
         <Route exact path="/landing">
-          {user.id ? <Redirect to="/home" /> : <LandingPage />}
+          {user.id ? <Redirect to="/home" /> : <LandingRegistration />}
         </Route>
         <ProtectedRoute exact path="/profile">
           <UserProfile />
