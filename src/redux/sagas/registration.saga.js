@@ -1,24 +1,33 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-// worker Saga: will be fired on "REGISTER" actions
 function* registerUser(action) {
   try {
     // clear any existing error on the registration page
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
-    // passes the username and password from the payload to the server
+    // sends the user registration info from the payload to the server
     yield axios.post('/api/user/register', action.payload);
 
-    // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload: action.payload });
+    console.log('User registered, dispatching login action'); // Add this line for logging
 
-    // set to 'login' mode so they see the login screen
-    // after registration or after they log out
-    yield put({ type: 'SET_TO_LOGIN_MODE' });
+    // automatically log the user in after registration
+    const loginAction = {
+      type: 'LOGIN',
+      payload: {
+        username: action.payload.username,
+        password: action.payload.password,
+      },
+    };
+    yield put(loginAction);
+
   } catch (error) {
     console.log('Error with user registration:', error);
-    yield put({ type: 'REGISTRATION_FAILED' });
+    if (error.response.status === 500) {
+      yield put({ type: 'REGISTRATION_FAILED' });
+    } else {
+      yield put({ type: 'REGISTRATION_FAILED_NO_CODE' });
+    }
   }
 }
 

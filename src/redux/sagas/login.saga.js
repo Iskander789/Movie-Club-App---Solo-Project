@@ -17,12 +17,11 @@ function* loginUser(action) {
     // allow the server session to recognize the user
     yield axios.post('/api/user/login', action.payload, config);
 
+    console.log('User logged in, fetching user data'); // Add this line for logging
+
     // after the user has logged in
     // get the user information from the server
     yield put({ type: 'FETCH_USER' });
-
-    // set redirect to user page
-    yield put({ type: 'REDIRECT', payload: '/user' });
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
@@ -52,13 +51,12 @@ function* logoutUser(action) {
     // it will end the session
     yield axios.post('/api/user/logout', config);
 
+    console.log('User logged out'); // Add this line for logging
+
     // now that the session has ended on the server
     // remove the client-side user object to let
     // the client-side code know the user is logged out
     yield put({ type: 'UNSET_USER' });
-
-    // set redirect to home page
-    yield put({ type: 'REDIRECT', payload: '/home' });
   } catch (error) {
     console.log('Error with user logout:', error);
   }

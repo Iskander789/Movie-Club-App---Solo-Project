@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
@@ -6,12 +6,6 @@ import { Redirect, useHistory } from 'react-router-dom';
 function LoginPage() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
-
-  useEffect(() => {
-    // Clear the form state when the component mounts
-    document.querySelector('input[name="username"]').value = '';
-    document.querySelector('input[name="password"]').value = '';
-  }, []);
 
   if (user.id) {
     return <Redirect to="/user" />;

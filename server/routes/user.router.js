@@ -80,4 +80,20 @@ router.post('/profile_picture', rejectUnauthenticated, upload.single('profile_pi
     });
 });
 
+// Fetch logged-in user data
+router.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({
+      id: req.user.id,
+      username: req.user.username,
+      email: req.user.email,
+      profile_picture: req.user.profile_picture,
+      group_name: req.user.group_name,
+      is_leader: req.user.is_leader,
+    });
+  } else {
+    res.sendStatus(403); // Forbidden
+  }
+});
+
 module.exports = router;
