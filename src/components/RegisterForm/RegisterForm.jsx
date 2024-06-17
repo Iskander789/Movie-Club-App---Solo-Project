@@ -7,14 +7,6 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
-  // Reset form fields when the component is unmounted
-  useEffect(() => {
-    return () => {
-      setUsername('');
-      setPassword('');
-    };
-  }, []);
-
   const registerUser = (event) => {
     event.preventDefault();
 
@@ -26,13 +18,19 @@ function RegisterForm() {
       },
     });
 
-    // Clear form fields after submission
+    // Clear input fields after submission
     setUsername('');
     setPassword('');
-  };
+  }; // end registerUser
+
+  // Ensure inputs are not pre-populated on component mount
+  useEffect(() => {
+    setUsername('');
+    setPassword('');
+  }, []);
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="formPanel" onSubmit={registerUser} autoComplete="off" key="registerForm">
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -48,6 +46,7 @@ function RegisterForm() {
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
+            autoComplete="new-username"
           />
         </label>
       </div>
@@ -60,6 +59,7 @@ function RegisterForm() {
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+            autoComplete="new-password"
           />
         </label>
       </div>
