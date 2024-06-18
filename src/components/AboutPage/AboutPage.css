@@ -1,0 +1,30 @@
+.container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #1c1c1c;
+    color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #ffd700;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  li strong {
+    color: #ffd700;
+  }
+  
+  p {
+    color: #f2f2f2;
+  }
+  

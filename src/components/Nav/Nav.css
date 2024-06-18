@@ -1,8 +1,7 @@
 .nav {
-  /* flex box layout */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   margin: 0 0 30px;
   background-color: #1c1c1c;
   overflow: hidden;
@@ -10,15 +9,22 @@
   padding: 10px 20px;
 }
 
-.nav a {
-  text-decoration: none;
-}
-
 .nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #ffd700;
   margin: 0;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  margin: 0 10px;
 }
 
 .navLink {

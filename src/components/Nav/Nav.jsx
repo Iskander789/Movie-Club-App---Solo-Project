@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import './Nav.css';
 
 function Nav() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const isLoggedIn = Boolean(user.id);
 
@@ -17,7 +17,7 @@ function Nav() {
   return (
     <nav className="nav">
       <div className="nav-title">Movie Club</div>
-      <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
+      <ul>
         {!isLoggedIn && location.pathname !== '/' && (
           <li>
             <Link to="/" className="navLink">Landing</Link>
@@ -45,7 +45,7 @@ function Nav() {
         )}
         {isLoggedIn ? (
           <li>
-            <button onClick={handleLogout} className="navLink">Log Out</button>
+            <button className="navLink" onClick={handleLogout}>Log Out</button>
           </li>
         ) : (
           location.pathname !== '/login' && (

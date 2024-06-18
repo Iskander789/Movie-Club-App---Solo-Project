@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import './UserPage.css';
 
 function UserPage() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((store) => store.user);
 
   return (
-    <div>
+    <div className="container">
       <h1>Welcome, {user.username}!</h1>
-      {/* Other components and content */}
+      <p>This is your home page. You can navigate to different sections using the navigation bar above.</p>
     </div>
   );
 }
