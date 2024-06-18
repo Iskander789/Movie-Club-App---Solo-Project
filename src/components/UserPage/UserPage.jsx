@@ -1,16 +1,20 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
+  const history = useHistory();
+
+  const handleLogout = () => {
+    // Logic to log out the user
+  };
 
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <Link to="/profile">Go to Profile</Link>
-      <LogOutButton className="btn" />
+      <h1>Welcome, {user.username}!</h1>
+      {/* Remove the "Go to Profile" link from here */}
+      <button onClick={handleLogout}>Log Out</button>
     </div>
   );
 }

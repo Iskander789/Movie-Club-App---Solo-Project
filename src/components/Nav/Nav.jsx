@@ -13,9 +13,9 @@ function Nav() {
     <nav className="nav">
       <div className="nav-title">Movie Club</div>
       <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
-        {!isLoggedIn && location.pathname !== '/landing' && (
+        {!isLoggedIn && location.pathname !== '/' && (
           <li>
-            <Link to="/landing" className="navLink">Landing</Link>
+            <Link to="/" className="navLink">Landing</Link>
           </li>
         )}
         {isLoggedIn && location.pathname !== '/home' && (
@@ -31,6 +31,11 @@ function Nav() {
         {isLoggedIn && location.pathname !== '/about' && (
           <li>
             <Link to="/about" className="navLink">About</Link>
+          </li>
+        )}
+        {isLoggedIn && location.pathname !== '/profile' && (
+          <li>
+            <Link to="/profile" className="navLink">Profile</Link>
           </li>
         )}
         {isLoggedIn ? (
