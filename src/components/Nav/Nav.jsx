@@ -1,6 +1,8 @@
+// src/components/Nav/Nav.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
 function Nav() {
@@ -33,21 +35,15 @@ function Nav() {
             <Link to="/about" className="navLink">About</Link>
           </li>
         )}
-        {isLoggedIn && location.pathname !== '/profile' && (
+        {isLoggedIn && (
           <li>
-            <Link to="/profile" className="navLink">Profile</Link>
+            <LogOutButton className="navLink" />
           </li>
         )}
-        {isLoggedIn ? (
+        {!isLoggedIn && location.pathname !== '/login' && (
           <li>
-            <Link to="/logout" className="navLink">Log Out</Link>
+            <Link to="/login" className="navLink">Login</Link>
           </li>
-        ) : (
-          location.pathname !== '/login' && (
-            <li>
-              <Link to="/login" className="navLink">Login</Link>
-            </li>
-          )
         )}
       </ul>
     </nav>

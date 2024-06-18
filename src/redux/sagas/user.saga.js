@@ -1,10 +1,7 @@
+// src/redux/sagas/user.saga.js
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-
-// Define action types
-const FETCH_USER = 'FETCH_USER';
-const SET_USER = 'SET_USER';
-const UNSET_USER = 'UNSET_USER';
+import { FETCH_USER, SET_USER, UNSET_USER } from '../actions/types';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -13,7 +10,7 @@ function* fetchUser() {
     yield put({ type: SET_USER, payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
-    if (error.response && error.response.status === 403) {
+    if (error.response.status === 403) {
       yield put({ type: UNSET_USER });
       yield put({ type: 'REDIRECT', payload: '/login' });
     }
