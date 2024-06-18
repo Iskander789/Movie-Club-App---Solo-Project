@@ -1,0 +1,132 @@
+/* src/global.css */
+
+/* Reset some basic elements to provide a consistent base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1c;
+    color: #f2f2f2;
+  }
+  
+  #react-root {
+    height: 100%;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffd700;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  li strong {
+    color: #ffd700;
+  }
+  
+  p {
+    color: #f2f2f2;
+  }
+  
+  img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+    background-color: #ffd700;
+    color: #1c1c1c;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #e6c200;
+    color: #1c1c1c;
+    border-color: #e6c200;
+  }
+  
+  .btn_asLink {
+    padding: 0;
+    border: none;
+    background: none;
+    color: #ffd700;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1rem;
+  }
+  
+  .btn_asLink:hover {
+    color: #e6c200;
+  }
+  
+  .alert {
+    box-sizing: border-box;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border: 2px solid #e01616;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    color: #ffd700;
+    font-size: 1rem;
+  }
+  
+  input {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 10px 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #f2f2f2;
+  }
+  
+  input:focus {
+    border-color: #ffd700;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
+  
+  .formPanel {
+    width: 100%;
+    max-width: 400px;
+    padding: 25px;
+    margin: 20px auto;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

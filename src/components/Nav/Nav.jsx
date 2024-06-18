@@ -14,6 +14,11 @@ function Nav() {
     dispatch({ type: 'LOGOUT' });
   };
 
+  // Return null if on the landing page and not logged in
+  if (!isLoggedIn && location.pathname === '/landing') {
+    return null;
+  }
+
   return (
     <nav className="nav">
       <div className="nav-title">Movie Club</div>

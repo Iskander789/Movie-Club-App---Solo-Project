@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { LOGIN } from '../../redux/actions/types';
+import './LoginForm.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setUsername('');
-    setPassword('');
-  }, []);
+  const errors = useSelector((store) => store.errors);
 
   const login = (event) => {
     event.preventDefault();
-
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: LOGIN,
         payload: {
-          username,
-          password,
+          username: username,
+          password: password,
         },
       });
     } else {
@@ -29,41 +25,29 @@ function LoginForm() {
   };
 
   return (
-    <form className="formPanel" onSubmit={login} autoComplete="off">
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
+    <form onSubmit={login}>
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            autoComplete="off"
-          />
-        </label>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete="new-password"
-          />
-        </label>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <input type="submit" name="submit" value="Log In" />
       </div>
     </form>
   );

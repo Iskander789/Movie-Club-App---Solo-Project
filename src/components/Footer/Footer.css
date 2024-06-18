@@ -1,5 +1,11 @@
 footer {
-  margin-top: 80px;
-  padding: 20px;
+  width: 100%;
   text-align: center;
+  padding: 10px 0;
+  background-color: #1c1c1c; /* Match the background color */
+  color: #f0f0f0;
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Ensure it starts from the left */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }

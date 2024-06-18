@@ -1,63 +1,60 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #1c1c1c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#react-root {
+  height: 100%;
+  width: 100%;
+}
+
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-  }
-  
-  .formPanel {
-    background-color: #1c1c1c;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    border: 2px solid #ffd700;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #ffd700;
-  }
-  
-  .alert {
-    color: red;
-    text-align: center;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: #f2f2f2;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #333;
-    color: #f2f2f2;
-  }
-  
-  input[type="submit"],
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #ffd700;
-    color: #1c1c1c;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover,
-  .btn:hover {
-    background-color: #e5c100;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1c1c1c;
+  margin: 0;
+  padding: 0;
+}
+
+.formPanel {
+  background-color: #2a2a2a; /* Inner rectangle color */
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid #ffd700; /* Border for inner rectangle */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for inner rectangle */
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.alert {
+  color: red;
+  text-align: center;
+}
+
+.btn_asLink {
+  background: none;
+  border: none;
+  color: #ffd700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.btn_asLink:hover {
+  color: #e6c200;
+}
