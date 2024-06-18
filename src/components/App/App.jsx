@@ -23,10 +23,8 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    if (user.id) {
-      dispatch({ type: 'FETCH_USER' });
-    }
-  }, [dispatch, user.id]);
+    dispatch({ type: 'FETCH_USER' });
+  }, [dispatch]);
 
   useEffect(() => {
     if (redirect) {

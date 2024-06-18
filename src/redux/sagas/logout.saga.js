@@ -1,15 +1,13 @@
-// src/redux/sagas/logout.saga.js
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { LOGOUT, UNSET_USER, REDIRECT } from '../actions/types';
+import { LOGOUT } from '../actions/types';
 
 function* logout() {
   try {
     yield axios.post('/api/user/logout');
-    yield put({ type: UNSET_USER });
-    yield put({ type: REDIRECT, payload: '/login' });
+    yield put({ type: 'UNSET_USER' });
   } catch (error) {
-    console.log('Logout failed', error);
+    console.log('Error with logout:', error);
   }
 }
 

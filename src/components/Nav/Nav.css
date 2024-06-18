@@ -1,34 +1,25 @@
 .nav {
   display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  margin: 0 0 30px;
+  justify-content: center;
+  align-items: center;
   background-color: #1c1c1c;
   overflow: hidden;
   border-bottom: 2px solid #ffd700;
   padding: 10px 20px;
 }
 
+.nav a {
+  text-decoration: none;
+}
+
 .nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #ffd700;
-  margin: 0;
-}
-
-.nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav ul li {
-  margin: 0 10px;
+  margin: 0 20px 0 0; /* Add right margin to separate from links */
 }
 
 .navLink {
-  display: inline-block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 20px;
@@ -49,4 +40,21 @@
 .navLink.active {
   background-color: #ffd700;
   color: #1c1c1c;
+}
+
+.nav-links-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links-container ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links-container li {
+  margin-right: 20px;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { REGISTER } from '../../redux/actions/types';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ function RegisterForm() {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: REGISTER,
       payload: {
         username: username,
         password: password,
@@ -21,7 +22,7 @@ function RegisterForm() {
     // Clear input fields after submission
     setUsername('');
     setPassword('');
-  }; // end registerUser
+  };
 
   // Ensure inputs are not pre-populated on component mount
   useEffect(() => {

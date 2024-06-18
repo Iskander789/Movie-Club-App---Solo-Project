@@ -81,7 +81,7 @@ router.post('/profile_picture', rejectUnauthenticated, upload.single('profile_pi
 });
 
 // Fetch logged-in user data
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   if (req.isAuthenticated()) {
     res.json({
       id: req.user.id,
