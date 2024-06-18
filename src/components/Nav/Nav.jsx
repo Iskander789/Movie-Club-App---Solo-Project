@@ -1,8 +1,6 @@
-// src/components/Nav/Nav.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
 function Nav() {
@@ -15,11 +13,6 @@ function Nav() {
     <nav className="nav">
       <div className="nav-title">Movie Club</div>
       <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
-        {!isLoggedIn && location.pathname !== '/' && (
-          <li>
-            <Link to="/" className="navLink">Landing</Link>
-          </li>
-        )}
         {isLoggedIn && location.pathname !== '/home' && (
           <li>
             <Link to="/home" className="navLink">Home</Link>
@@ -35,14 +28,25 @@ function Nav() {
             <Link to="/about" className="navLink">About</Link>
           </li>
         )}
-        {isLoggedIn && (
+        {isLoggedIn && location.pathname !== '/profile' && (
           <li>
-            <LogOutButton className="navLink" />
+            <Link to="/profile" className="navLink">Profile</Link>
           </li>
         )}
-        {!isLoggedIn && location.pathname !== '/login' && (
+        {isLoggedIn ? (
           <li>
-            <Link to="/login" className="navLink">Login</Link>
+            <Link to="/logout" className="navLink">Log Out</Link>
+          </li>
+        ) : (
+          location.pathname !== '/login' && location.pathname !== '/landing' && (
+            <li>
+              <Link to="/login" className="navLink">Login</Link>
+            </li>
+          )
+        )}
+        {!isLoggedIn && location.pathname !== '/registration' && location.pathname !== '/login' && (
+          <li>
+            <Link to="/registration" className="navLink">Register</Link>
           </li>
         )}
       </ul>
