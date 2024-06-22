@@ -15,7 +15,16 @@ function UserProfile() {
 
   useEffect(() => {
     axios.get('/api/user/profile')
-      .then(response => setProfile(response.data))
+      .then(response => {
+        const { username, email, group_name, is_leader, profile_picture } = response.data;
+        setProfile({
+          username: username || '',
+          email: email || '',
+          group_name: group_name || '',
+          is_leader: is_leader || false,
+          profile_picture: profile_picture || ''
+        });
+      })
       .catch(error => console.log('Error fetching profile:', error));
   }, []);
 
