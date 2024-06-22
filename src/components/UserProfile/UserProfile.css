@@ -9,19 +9,16 @@
   margin-top: 20px;
 }
 
-form > div {
-  margin-bottom: 10px;
+.cancel-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
-form > div > label {
-  display: inline-block;
-  width: 100px;
-}
-
-form > div > input {
-  padding: 5px;
-}
-
-button {
-  margin-right: 10px;
+.cancel-button:hover {
+  background-color: darkred;
 }

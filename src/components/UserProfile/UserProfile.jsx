@@ -11,7 +11,6 @@ function UserProfile() {
     group_name: '',
     profile_picture: ''
   });
-
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -45,14 +44,6 @@ function UserProfile() {
       .catch(error => console.log('Error uploading profile picture:', error));
   };
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    // Fetch the profile again to reset any changes made in the form
-    axios.get('/api/user/profile')
-      .then(response => setProfile(response.data))
-      .catch(error => console.log('Error fetching profile:', error));
-  };
-
   return (
     <div className="container">
       <h2>User Profile</h2>
@@ -76,7 +67,7 @@ function UserProfile() {
             {profile.profile_picture && <img src={`/${profile.profile_picture}`} alt="Profile" className="profile-picture" />}
           </div>
           <button type="submit">Submit Changes</button>
-          <button type="button" onClick={handleCancel}>Cancel</button>
+          <button type="button" className="cancel-button" onClick={() => setIsEditing(false)}>Cancel</button>
         </form>
       ) : (
         <div>
