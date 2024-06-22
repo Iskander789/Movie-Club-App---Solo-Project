@@ -9,22 +9,12 @@ function UserProfile() {
     username: '',
     email: '',
     group_name: '',
-    is_leader: false,
     profile_picture: ''
   });
 
   useEffect(() => {
     axios.get('/api/user/profile')
-      .then(response => {
-        const { username, email, group_name, is_leader, profile_picture } = response.data;
-        setProfile({
-          username: username || '',
-          email: email || '',
-          group_name: group_name || '',
-          is_leader: is_leader || false,
-          profile_picture: profile_picture || ''
-        });
-      })
+      .then(response => setProfile(response.data))
       .catch(error => console.log('Error fetching profile:', error));
   }, []);
 
@@ -65,10 +55,6 @@ function UserProfile() {
         <div>
           <label>Group Name:</label>
           <input type="text" name="group_name" value={profile.group_name} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Leader:</label>
-          <input type="checkbox" name="is_leader" checked={profile.is_leader} readOnly />
         </div>
         <div>
           <label>Profile Picture:</label>
