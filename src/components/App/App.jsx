@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
@@ -13,7 +12,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserProfile from '../UserProfile/UserProfile';
-import GroupsPage from '../GroupsPage/GroupsPage';
+import GroupsPage from '../GroupsPage/GroupsPage'; // Add this line
+import CreateGroupPage from '../CreateGroupPage/CreateGroupPage'; // Add this line
 
 import './App.css';
 
@@ -50,6 +50,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute exact path="/groups">
           <GroupsPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/create-group">
+          <CreateGroupPage />
         </ProtectedRoute>
         <Route exact path="/login">
           {user.id ? <Redirect to="/home" /> : <LoginPage />}
