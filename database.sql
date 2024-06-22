@@ -21,3 +21,27 @@ CREATE TABLE "session" (
 );
 
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+CREATE TABLE groups (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE group_members (
+  id SERIAL PRIMARY KEY,
+  group_id INT REFERENCES groups(id) ON DELETE CASCADE,
+  user_id INT REFERENCES "user"(id) ON DELETE CASCADE,
+  is_leader BOOLEAN DEFAULT FALSE,
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE movies (
+  id SERIAL PRIMARY KEY,
+  group_id INT REFERENCES groups(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+

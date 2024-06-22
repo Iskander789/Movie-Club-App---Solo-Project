@@ -1,0 +1,44 @@
+/* src/components/GroupsPage/GroupsPage.css */
+
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2a2a2a;
+    color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+  }
+  
+  h2 {
+    color: #ffd700;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    color: #f2f2f2;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .group-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .group-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+  }
+  
+  .group-item h3 {
+    color: #ffd700;
+    margin: 0;
+  }
+  
+  .group-item p {
+    margin: 5px 0 0 0;
+  }
+  

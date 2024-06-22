@@ -13,8 +13,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserProfile from '../UserProfile/UserProfile';
+import GroupsPage from '../GroupsPage/GroupsPage';
 
-import '../../global.css'; // Updated path
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,32 +37,33 @@ function App() {
   return (
     <div>
       <Nav />
-      <div className="content-container">
-        <Switch>
-          <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
-          <ProtectedRoute exact path="/about">
-            <AboutPage />
-          </ProtectedRoute>
-          <ProtectedRoute exact path="/home">
-            <UserPage />
-          </ProtectedRoute>
-          <ProtectedRoute exact path="/info">
-            <InfoPage />
-          </ProtectedRoute>
-          <Route exact path="/login">
-            {user.id ? <Redirect to="/home" /> : <LoginPage />}
-          </Route>
-          <Route exact path="/landing">
-            {user.id ? <Redirect to="/home" /> : <LandingRegistration />}
-          </Route>
-          <ProtectedRoute exact path="/profile">
-            <UserProfile />
-          </ProtectedRoute>
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
+        <ProtectedRoute exact path="/about">
+          <AboutPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/home">
+          <UserPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/info">
+          <InfoPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/groups">
+          <GroupsPage />
+        </ProtectedRoute>
+        <Route exact path="/login">
+          {user.id ? <Redirect to="/home" /> : <LoginPage />}
+        </Route>
+        <Route exact path="/landing">
+          {user.id ? <Redirect to="/home" /> : <LandingRegistration />}
+        </Route>
+        <ProtectedRoute exact path="/profile">
+          <UserProfile />
+        </ProtectedRoute>
+        <Route>
+          <h1>404</h1>
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

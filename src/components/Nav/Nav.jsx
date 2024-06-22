@@ -39,6 +39,11 @@ function Nav() {
               <Link to="/profile" className="navLink">Profile</Link>
             </li>
           )}
+          {isLoggedIn && location.pathname !== '/groups' && (
+            <li>
+              <Link to="/groups" className="navLink">Your Groups</Link>
+            </li>
+          )}
         </ul>
         <ul>
           {isLoggedIn ? (
