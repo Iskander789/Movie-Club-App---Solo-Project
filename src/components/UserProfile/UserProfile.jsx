@@ -12,6 +12,8 @@ function UserProfile() {
     profile_picture: ''
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     axios.get('/api/user/profile')
       .then(response => setProfile(response.data))
@@ -26,7 +28,10 @@ function UserProfile() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.put('/api/user/profile', profile)
-      .then(response => console.log('Profile updated'))
+      .then(response => {
+        console.log('Profile updated');
+        setIsEditing(false);
+      })
       .catch(error => console.log('Error updating profile:', error));
   };
 
@@ -40,29 +45,48 @@ function UserProfile() {
       .catch(error => console.log('Error uploading profile picture:', error));
   };
 
+  const handleCancel = () => {
+    setIsEditing(false);
+    // Fetch the profile again to reset any changes made in the form
+    axios.get('/api/user/profile')
+      .then(response => setProfile(response.data))
+      .catch(error => console.log('Error fetching profile:', error));
+  };
+
   return (
     <div className="container">
       <h2>User Profile</h2>
-      <form onSubmit={handleSubmit}>
+      {isEditing ? (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Username:</label>
+            <input type="text" name="username" value={profile.username} onChange={handleChange} />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input type="email" name="email" value={profile.email} onChange={handleChange} />
+          </div>
+          <div>
+            <label>Group Name:</label>
+            <input type="text" name="group_name" value={profile.group_name} onChange={handleChange} />
+          </div>
+          <div>
+            <label>Profile Picture:</label>
+            <input type="file" onChange={handleFileChange} />
+            {profile.profile_picture && <img src={`/${profile.profile_picture}`} alt="Profile" className="profile-picture" />}
+          </div>
+          <button type="submit">Submit Changes</button>
+          <button type="button" onClick={handleCancel}>Cancel</button>
+        </form>
+      ) : (
         <div>
-          <label>Username:</label>
-          <input type="text" name="username" value={profile.username} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={profile.email} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Group Name:</label>
-          <input type="text" name="group_name" value={profile.group_name} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Profile Picture:</label>
-          <input type="file" onChange={handleFileChange} />
+          <p><strong>Username:</strong> {profile.username}</p>
+          <p><strong>Email:</strong> {profile.email}</p>
+          <p><strong>Group Name:</strong> {profile.group_name}</p>
           {profile.profile_picture && <img src={`/${profile.profile_picture}`} alt="Profile" className="profile-picture" />}
+          <button onClick={() => setIsEditing(true)}>Update Profile</button>
         </div>
-        <button type="submit">Update Profile</button>
-      </form>
+      )}
     </div>
   );
 }
