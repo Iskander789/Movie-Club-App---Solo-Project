@@ -14,16 +14,11 @@ function Nav() {
     dispatch({ type: 'LOGOUT' });
   };
 
-  // Return null if on the landing page and not logged in
-  if (!isLoggedIn && location.pathname === '/landing') {
-    return null;
-  }
-
   return (
     <nav className="nav">
       <div className="nav-title">Movie Club</div>
       <div className="nav-links-container">
-        <ul>
+        <ul className="nav-links">
           {isLoggedIn && location.pathname !== '/home' && (
             <li>
               <Link to="/home" className="navLink">Home</Link>
@@ -44,18 +39,15 @@ function Nav() {
               <Link to="/profile" className="navLink">Profile</Link>
             </li>
           )}
-        </ul>
-        <ul>
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <li>
-              <button className="navLink" onClick={handleLogout}>Log Out</button>
+              <Link to="/" className="navLink" onClick={handleLogout}>Log Out</Link>
             </li>
-          ) : (
-            location.pathname !== '/login' && (
-              <li>
-                <Link to="/login" className="navLink">Login</Link>
-              </li>
-            )
+          )}
+          {!isLoggedIn && location.pathname !== '/login' && (
+            <li>
+              <Link to="/login" className="navLink">Login</Link>
+            </li>
           )}
         </ul>
       </div>
