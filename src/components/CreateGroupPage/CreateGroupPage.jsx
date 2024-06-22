@@ -9,12 +9,15 @@ function CreateGroupPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     axios.post('/api/groups', { name: groupName })
-      .then(response => {
+      .then((response) => {
         console.log('Group created:', response.data);
         history.push('/groups');
       })
-      .catch(error => console.log('Error creating group:', error));
+      .catch((error) => {
+        console.error('Error creating group:', error);
+      });
   };
 
   return (
@@ -22,16 +25,15 @@ function CreateGroupPage() {
       <h2>Create a New Group</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="groupName">Group Name:</label>
+          <label>Group Name:</label>
           <input
             type="text"
-            id="groupName"
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="btn">Create Group</button>
+        <button type="submit">Create Group</button>
       </form>
     </div>
   );
