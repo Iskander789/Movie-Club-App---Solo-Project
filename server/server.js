@@ -9,7 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route Includes
 const userRouter = require('./routes/user.router');
-const groupRouter = require('./routes/group.router');
+const groupRouter = require('./routes/group.router'); // Ensure this line is present
 
 // Express Middleware
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/user', userRouter);
-app.use('/api/groups', groupRouter);
+app.use('/api/groups', groupRouter); // Ensure this line is present
 
 console.log(`Server session secret: ${process.env.SERVER_SESSION_SECRET}`);
 console.log(`Server running on port: ${PORT}`);

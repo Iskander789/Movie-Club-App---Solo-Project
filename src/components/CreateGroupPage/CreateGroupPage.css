@@ -1,74 +1,90 @@
 .create-group-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #1c1c1c;
-    color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .create-group-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #f2f2f2;
   }
   
-  .create-group-form div {
+  .create-group-container h2 {
+    color: #ffd700;
+    margin-bottom: 20px;
+  }
+  
+  .create-group-container .create-group-form {
+    width: 100%;
+  }
+  
+  .create-group-container .form-group {
     margin-bottom: 15px;
   }
   
-  .create-group-form label {
+  .create-group-container label {
+    display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
   
-  .create-group-form input,
-  .create-group-form textarea {
+  .create-group-container .form-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
+    background-color: #1c1c1c;
+    color: #f2f2f2;
   }
   
-  .create-group-form input:focus,
-  .create-group-form textarea:focus {
+  .create-group-container .form-input:focus {
     border-color: #ffd700;
     outline: none;
     box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
   }
   
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: 2px solid #ffd700;
+  .create-group-container textarea.form-input {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .create-group-container .error-message {
+    color: #e01616;
+    margin-bottom: 15px;
+  }
+  
+  .create-group-container .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .create-group-container .btn {
+    padding: 10px 20px;
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .create-group-container .btn-primary {
     background-color: #ffd700;
     color: #1c1c1c;
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   
-  .btn:hover {
+  .create-group-container .btn-primary:hover {
     background-color: #e6c200;
-    color: #1c1c1c;
-    border-color: #e6c200;
   }
   
-  .cancel-btn {
-    margin-left: 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
+  .create-group-container .btn-secondary {
+    padding: 5px 10px; /* Smaller padding for smaller button */
+    background-color: #e01616; /* Different color for the Cancel button */
+    color: #f2f2f2;
   }
   
-  .cancel-btn:hover {
-    background-color: darkred;
+  .create-group-container .btn-secondary:hover {
+    background-color: #c01414;
   }
   

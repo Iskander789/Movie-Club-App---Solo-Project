@@ -1,4 +1,4 @@
-/* global.css */
+global.css
 
 /* General Reset */
 * {
@@ -127,7 +127,6 @@ input:focus {
   overflow: hidden;
   border-bottom: 2px solid #ffd700;
   padding: 10px 20px;
-  margin-bottom: 20px; /* Added margin for spacing */
 }
 
 .nav a {
@@ -187,9 +186,6 @@ footer {
   padding: 10px 0;
   background-color: #1c1c1c;
   color: #f0f0f0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 /* Login Page */

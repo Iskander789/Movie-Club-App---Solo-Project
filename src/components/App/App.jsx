@@ -15,7 +15,8 @@ import UserProfile from '../UserProfile/UserProfile';
 import GroupsPage from '../GroupsPage/GroupsPage';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
-import '../../global.css';  // Corrected path to global.css
+// Remove the global CSS import
+// import '../../global.css';
 
 function App() {
   const dispatch = useDispatch();

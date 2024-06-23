@@ -3,21 +3,32 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// POST route to create a new group
+// GET all groups
+router.get('/', rejectUnauthenticated, (req, res) => {
+  const query = `SELECT * FROM groups WHERE user_id = $1`;
+  pool.query(query, [req.user.id])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.error('Error in GET /api/groups', err);
+      res.sendStatus(500);
+    });
+});
+
+// POST new group
 router.post('/', rejectUnauthenticated, (req, res) => {
-  const { groupName, description } = req.body;
-  const userId = req.user.id;
-
-  const queryText = `
-    INSERT INTO "group" ("name", "description", "leader_id")
-    VALUES ($1, $2, $3)
-    RETURNING id;
+  const { name, description } = req.body;
+  const query = `
+    INSERT INTO groups (name, description, user_id)
+    VALUES ($1, $2, $3) RETURNING *;
   `;
-
-  pool.query(queryText, [groupName, description, userId])
-    .then(result => res.status(201).send(result.rows[0]))
-    .catch(error => {
-      console.error('Error creating group:', error);
+  pool.query(query, [name, description, req.user.id])
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => {
+      console.error('Error in POST /api/groups', err);
       res.sendStatus(500);
     });
 });
