@@ -19,8 +19,8 @@
   
   .form-group label {
     display: block;
-    margin-bottom: 5px;
-    color: #ffd700;
+    margin-bottom: 8px;
+    font-weight: bold;
   }
   
   .form-input {
@@ -28,51 +28,52 @@
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
-  }
-  
-  .form-input:focus {
-    border-color: #ffd700;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    font-size: 1rem;
   }
   
   .form-actions {
     display: flex;
     justify-content: space-between;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
+    align-items: center;
   }
   
   .btn-primary {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 2px solid #ffd700;
+    border-radius: 4px;
     background-color: #ffd700;
     color: #1c1c1c;
-    border: 2px solid #ffd700;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   
   .btn-primary:hover {
     background-color: #e6c200;
+    border-color: #e6c200;
   }
   
   .btn-secondary {
-    background-color: #d9534f;
-    color: #fff;
-    border: 2px solid #d9534f;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #ccc;
+    color: #1c1c1c;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   
   .btn-secondary:hover {
-    background-color: #c9302c;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 20px;
+    background-color: #999;
+    border-color: #999;
   }
   

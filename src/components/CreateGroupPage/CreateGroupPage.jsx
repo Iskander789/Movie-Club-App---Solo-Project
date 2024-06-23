@@ -46,10 +46,10 @@ function CreateGroupPage() {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" className="btn btn-primary">Create Group</button>
+          <button type="submit" className="btn-primary">Create Group</button>
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn-secondary"
             onClick={() => history.push('/groups')}
           >
             Cancel
