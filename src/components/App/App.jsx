@@ -4,19 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+import AboutThisApp from '../AboutThisApp/AboutThisApp';
 import TechnologiesUsed from '../TechnologiesUsed/TechnologiesUsed';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserProfile from '../UserProfile/UserProfile';
 import GroupsPage from '../GroupsPage/GroupsPage';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
-import '../../global.css';
+import '../../global.css';  // Corrected path to global.css
 
 function App() {
   const dispatch = useDispatch();
@@ -40,14 +39,20 @@ function App() {
       <Nav />
       <Switch>
         <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
-        <ProtectedRoute exact path="/technologies">
+        <ProtectedRoute exact path="/about">
+          <AboutThisApp />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/technologies-used">
           <TechnologiesUsed />
         </ProtectedRoute>
         <ProtectedRoute exact path="/home">
           <UserPage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/info">
-          <InfoPage />
+        <ProtectedRoute exact path="/groups">
+          <GroupsPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/groups/new">
+          <CreateGroupPage />
         </ProtectedRoute>
         <Route exact path="/login">
           {user.id ? <Redirect to="/home" /> : <LoginPage />}
@@ -57,12 +62,6 @@ function App() {
         </Route>
         <ProtectedRoute exact path="/profile">
           <UserProfile />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/groups">
-          <GroupsPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/create-group">
-          <CreateGroupPage />
         </ProtectedRoute>
         <Route>
           <h1>404</h1>

@@ -19,43 +19,39 @@ function Nav() {
       <div className="nav-title">Movie Club</div>
       <div className="nav-links-container">
         <ul>
-          {isLoggedIn && location.pathname !== '/home' && (
-            <li>
-              <Link to="/home" className="navLink">Home</Link>
-            </li>
-          )}
-          {isLoggedIn && location.pathname !== '/info' && (
-            <li>
-              <Link to="/info" className="navLink">Info Page</Link>
-            </li>
-          )}
-          {isLoggedIn && location.pathname !== '/technologies' && (
-            <li>
-              <Link to="/technologies" className="navLink">Technologies Used</Link>
-            </li>
-          )}
-          {isLoggedIn && location.pathname !== '/profile' && (
-            <li>
-              <Link to="/profile" className="navLink">Profile</Link>
-            </li>
-          )}
-          {isLoggedIn && location.pathname !== '/groups' && (
-            <li>
-              <Link to="/groups" className="navLink">Your Groups</Link>
-            </li>
-          )}
-        </ul>
-        <ul>
-          {isLoggedIn ? (
-            <li>
-              <Link to="#" className="navLink" onClick={handleLogout}>Log Out</Link>
-            </li>
-          ) : (
-            location.pathname !== '/login' && (
+          {isLoggedIn && (
+            <>
               <li>
-                <Link to="/login" className="navLink">Login</Link>
+                <Link to="/home" className={`navLink ${location.pathname === '/home' ? 'active' : ''}`}>
+                  Home
+                </Link>
               </li>
-            )
+              <li>
+                <Link to="/groups" className={`navLink ${location.pathname === '/groups' ? 'active' : ''}`}>
+                  Your Groups
+                </Link>
+              </li>
+              <li>
+                <Link to="/profile" className={`navLink ${location.pathname === '/profile' ? 'active' : ''}`}>
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className={`navLink ${location.pathname === '/about' ? 'active' : ''}`}>
+                  About This App
+                </Link>
+              </li>
+              <li>
+                <Link to="/technologies" className={`navLink ${location.pathname === '/technologies' ? 'active' : ''}`}>
+                  Technologies Used
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className="navLink" onClick={handleLogout}>
+                  Log Out
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
