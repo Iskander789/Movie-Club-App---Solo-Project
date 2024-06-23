@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import './CreateGroupPage.css';
 
 function CreateGroupPage() {
   const [groupName, setGroupName] = useState('');
+  const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch({
+      type: 'CREATE_GROUP',
+      payload: { groupName, description }
+    });
+    history.push('/groups');
+  };
 
-    axios.post('/api/groups', { name: groupName })
-      .then((response) => {
-        console.log('Group created:', response.data);
-        history.push('/groups');
-      })
-      .catch((error) => {
-        console.error('Error creating group:', error);
-      });
+  const handleCancel = () => {
+    history.push('/groups');
   };
 
   return (
-    <div className="container">
+    <div className="create-group-container">
       <h2>Create a New Group</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="create-group-form">
         <div>
-          <label>Group Name:</label>
+          <label htmlFor="groupName">Group Name:</label>
           <input
             type="text"
+            id="groupName"
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Create Group</button>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn">Create Group</button>
+        <button type="button" className="btn cancel-btn" onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   );
