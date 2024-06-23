@@ -15,8 +15,7 @@ import UserProfile from '../UserProfile/UserProfile';
 import GroupsPage from '../GroupsPage/GroupsPage';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
-// Remove the global CSS import
-// import '../../global.css';
+import '../../global.css';  // Corrected path to global.css
 
 function App() {
   const dispatch = useDispatch();
@@ -40,31 +39,19 @@ function App() {
       <Nav />
       <Switch>
         <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
-        <ProtectedRoute exact path="/about">
-          <AboutThisApp />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/technologies-used">
-          <TechnologiesUsed />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/home">
-          <UserPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/groups">
-          <GroupsPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/groups/new">
-          <CreateGroupPage />
-        </ProtectedRoute>
+        <ProtectedRoute exact path="/about" component={AboutThisApp} />
+        <ProtectedRoute exact path="/technologies-used" component={TechnologiesUsed} />
+        <ProtectedRoute exact path="/home" component={UserPage} />
+        <ProtectedRoute exact path="/groups" component={GroupsPage} />
+        <ProtectedRoute exact path="/groups/new" component={CreateGroupPage} />
         <Route exact path="/login">
           {user.id ? <Redirect to="/home" /> : <LoginPage />}
         </Route>
         <Route exact path="/landing">
           {user.id ? <Redirect to="/home" /> : <LandingRegistration />}
         </Route>
-        <ProtectedRoute exact path="/profile">
-          <UserProfile />
-        </ProtectedRoute>
-        <Route>
+        <ProtectedRoute exact path="/profile" component={UserProfile} />
+        <Route path="*">
           <h1>404</h1>
         </Route>
       </Switch>
