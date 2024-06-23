@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
+import TechnologiesUsed from '../TechnologiesUsed/TechnologiesUsed';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserProfile from '../UserProfile/UserProfile';
-import GroupsPage from '../GroupsPage/GroupsPage'; // Add this line
-import CreateGroupPage from '../CreateGroupPage/CreateGroupPage'; // Add this line
+import GroupsPage from '../GroupsPage/GroupsPage';
+import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
-import './App.css';
+import '../../global.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,20 +40,14 @@ function App() {
       <Nav />
       <Switch>
         <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
-        <ProtectedRoute exact path="/about">
-          <AboutPage />
+        <ProtectedRoute exact path="/technologies">
+          <TechnologiesUsed />
         </ProtectedRoute>
         <ProtectedRoute exact path="/home">
           <UserPage />
         </ProtectedRoute>
         <ProtectedRoute exact path="/info">
           <InfoPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/groups">
-          <GroupsPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/create-group">
-          <CreateGroupPage />
         </ProtectedRoute>
         <Route exact path="/login">
           {user.id ? <Redirect to="/home" /> : <LoginPage />}
@@ -62,6 +57,12 @@ function App() {
         </Route>
         <ProtectedRoute exact path="/profile">
           <UserProfile />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/groups">
+          <GroupsPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/create-group">
+          <CreateGroupPage />
         </ProtectedRoute>
         <Route>
           <h1>404</h1>

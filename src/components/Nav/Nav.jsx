@@ -29,9 +29,9 @@ function Nav() {
               <Link to="/info" className="navLink">Info Page</Link>
             </li>
           )}
-          {isLoggedIn && location.pathname !== '/about' && (
+          {isLoggedIn && location.pathname !== '/technologies' && (
             <li>
-              <Link to="/about" className="navLink">About</Link>
+              <Link to="/technologies" className="navLink">Technologies Used</Link>
             </li>
           )}
           {isLoggedIn && location.pathname !== '/profile' && (
@@ -48,7 +48,7 @@ function Nav() {
         <ul>
           {isLoggedIn ? (
             <li>
-              <Link to="/login" className="navLink" onClick={handleLogout}>Log Out</Link>
+              <Link to="#" className="navLink" onClick={handleLogout}>Log Out</Link>
             </li>
           ) : (
             location.pathname !== '/login' && (

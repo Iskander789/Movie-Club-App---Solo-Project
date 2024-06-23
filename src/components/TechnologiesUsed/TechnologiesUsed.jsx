@@ -1,11 +1,11 @@
 import React from 'react';
-import './AboutPage.css';
+import './TechnologiesUsed.css';
 
-function AboutPage() {
+function TechnologiesUsed() {
   return (
     <div className="container">
       <div>
-        <h2>About This Project</h2>
+        <h2>Technologies Used</h2>
         <p>
           Welcome to the Movie Club App! This project leverages modern web development technologies to provide a seamless and engaging experience for users. Here are the key technologies used in this project:
         </p>
@@ -43,4 +43,4 @@ function AboutPage() {
   );
 }
 
-export default AboutPage;
+export default TechnologiesUsed;
