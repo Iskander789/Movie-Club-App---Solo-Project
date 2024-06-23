@@ -1,34 +1,38 @@
 const express = require('express');
-const pool = require('../modules/pool');
 const router = express.Router();
+const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// GET all groups
-router.get('/', rejectUnauthenticated, (req, res) => {
-  const query = `SELECT * FROM groups WHERE user_id = $1`;
-  pool.query(query, [req.user.id])
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(err => {
-      console.error('Error in GET /api/groups', err);
+// Route to fetch user groups
+router.get('/user', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM groups WHERE user_id = $1`;
+  pool.query(queryText, [req.user.id])
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.error('Error fetching user groups:', error);
       res.sendStatus(500);
     });
 });
 
-// POST new group
+// Route to fetch other groups
+router.get('/other', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM groups WHERE user_id != $1`;
+  pool.query(queryText, [req.user.id])
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.error('Error fetching other groups:', error);
+      res.sendStatus(500);
+    });
+});
+
+// Route to create a new group
 router.post('/', rejectUnauthenticated, (req, res) => {
   const { name, description } = req.body;
-  const query = `
-    INSERT INTO groups (name, description, user_id)
-    VALUES ($1, $2, $3) RETURNING *;
-  `;
-  pool.query(query, [name, description, req.user.id])
-    .then(result => {
-      res.send(result.rows[0]);
-    })
-    .catch(err => {
-      console.error('Error in POST /api/groups', err);
+  const queryText = `INSERT INTO groups (name, description, user_id) VALUES ($1, $2, $3) RETURNING id`;
+  pool.query(queryText, [name, description, req.user.id])
+    .then((result) => res.status(201).send(result.rows[0]))
+    .catch((error) => {
+      console.error('Error creating new group:', error);
       res.sendStatus(500);
     });
 });

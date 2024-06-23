@@ -1,50 +1,60 @@
-.groups-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.groups-page {
   padding: 20px;
-  background-color: #1c1c1c;
-  color: #f0f0f0;
-  min-height: 80vh; /* To make sure the content covers a good portion of the viewport */
 }
 
-.groups-header {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ffd700;
-}
-
-.groups-list {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 20px;
-}
-
-.groups-list li {
-  background-color: #2a2a2a;
+.groups-page h2 {
   margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffd700; /* Gold color for headings */
 }
 
-.groups-list li:hover {
-  background-color: #333;
+.groups-page p {
+  margin-bottom: 5px;
+  color: #f0f0f0; /* Light grey color for text */
 }
 
-.create-group-link {
-  font-size: 1.2rem;
-  color: #ffd700;
-  text-decoration: none;
-  border: 2px solid #ffd700;
+.create-group-btn {
+  display: block;
+  margin: 20px 0;
   padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  background-color: #ffd700; /* Gold color */
+  color: #1c1c1c; /* Dark background color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.create-group-link:hover {
-  background-color: #ffd700;
-  color: #1c1c1c;
+.create-group-btn:hover {
+  background-color: #e6c200; /* Slightly darker gold on hover */
+}
+
+.group-section {
+  margin-bottom: 20px;
+}
+
+.group-section:last-child {
+  margin-bottom: 0;
+}
+
+.group-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.group-list li {
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #2a2a2a; /* Dark grey background for list items */
+  border-radius: 4px;
+}
+
+.group-list li:hover {
+  background-color: #333; /* Slightly lighter grey on hover */
+}
+
+.error-message {
+  color: red;
 }

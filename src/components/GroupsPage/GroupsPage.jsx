@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { fetchGroups, fetchOtherGroups } from '../../redux/actions/groupActions';
 import './GroupsPage.css';
 
 function GroupsPage() {
-  const [groups, setGroups] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const userGroups = useSelector((state) => state.group.userGroups);
+  const otherGroups = useSelector((state) => state.group.otherGroups);
 
   useEffect(() => {
-    axios.get('/api/groups')
-      .then((response) => {
-        setGroups(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching groups: ', error);
-      });
-  }, []);
+    dispatch(fetchGroups());
+    dispatch(fetchOtherGroups());
+  }, [dispatch]);
 
   return (
-    <div className="groups-container">
-      <h1 className="groups-header">Your Groups</h1>
-      {groups.length === 0 ? (
-        <p>You are not a member of any groups yet.</p>
+    <div className="groups-page">
+      <h2>Your Groups</h2>
+      {userGroups.length ? (
+        userGroups.map((group) => <p key={group.id}>{group.name}</p>)
       ) : (
-        <ul className="groups-list">
-          {groups.map((group) => (
-            <li key={group.id}>
-              <h2>{group.name}</h2>
-              <p>{group.description}</p>
-            </li>
-          ))}
-        </ul>
+        <p>You are not a member of any groups yet.</p>
       )}
-      <Link to="/groups/new" className="create-group-link">Create a New Group</Link>
+      <button onClick={() => history.push('/groups/new')} className="btn btn-primary create-group-btn">
+        Create a New Group
+      </button>
+      <h2>Other Groups</h2>
+      {otherGroups.length ? (
+        otherGroups.map((group) => <p key={group.id}>{group.name}</p>)
+      ) : (
+        <p>There are no other groups available.</p>
+      )}
     </div>
   );
 }

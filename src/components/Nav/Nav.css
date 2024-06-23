@@ -1,22 +1,22 @@
 .nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Ensures space between the title and links */
+  align-items: center; /* Vertically centers the items */
   background-color: #1c1c1c;
-  overflow: hidden;
   border-bottom: 2px solid #ffd700;
   padding: 10px 20px;
 }
 
-.nav-title .navLink-title {
+.nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #ffd700;
-  text-decoration: none;
+  margin: 0;
 }
 
-.nav-title .navLink-title:hover {
-  color: #e6c200;
+.nav-title-link {
+  color: #ffd700; /* Ensure the link color matches the title color */
+  text-decoration: none; /* Remove underline from the link */
 }
 
 .nav-links-container {
@@ -37,16 +37,16 @@
 }
 
 .navLink {
+  color: #f2f2f2;
   text-align: center;
   padding: 14px 20px;
+  text-decoration: none;
   font-size: 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
   border: none;
   cursor: pointer;
   outline: 0;
   background-color: transparent;
-  text-decoration: none;
-  color: #f2f2f2;
 }
 
 .navLink:hover {
