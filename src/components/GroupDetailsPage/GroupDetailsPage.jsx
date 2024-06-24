@@ -7,7 +7,7 @@ import './GroupDetailsPage.css';
 function GroupDetailsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const groupDetails = useSelector((state) => state.group.groupDetails);
+  const groupDetails = useSelector((store) => store.group.groupDetails);
 
   useEffect(() => {
     dispatch(fetchGroupDetails(id));
@@ -21,7 +21,6 @@ function GroupDetailsPage() {
     <div className="group-details-container">
       <h2>{groupDetails.name}</h2>
       <p>{groupDetails.description}</p>
-      {/* Add more details as needed */}
     </div>
   );
 }
