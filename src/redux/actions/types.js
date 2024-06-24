@@ -1,4 +1,3 @@
-// Action types
 export const FETCH_USER = 'FETCH_USER';
 export const SET_USER = 'SET_USER';
 export const UNSET_USER = 'UNSET_USER';
@@ -14,6 +13,11 @@ export const FETCH_OTHER_GROUPS = 'FETCH_OTHER_GROUPS';
 export const SET_OTHER_GROUPS = 'SET_OTHER_GROUPS';
 export const FETCH_GROUP_DETAILS = 'FETCH_GROUP_DETAILS';
 export const SET_GROUP_DETAILS = 'SET_GROUP_DETAILS';
-export const DELETE_GROUP = 'DELETE_GROUP';
-export const UPDATE_GROUP = 'UPDATE_GROUP';
 export const SET_ERROR = 'SET_ERROR';
+export const FETCH_GROUP_MESSAGES = 'FETCH_GROUP_MESSAGES';
+export const SET_GROUP_MESSAGES = 'SET_GROUP_MESSAGES';
+export const POST_MESSAGE = 'POST_MESSAGE';
+export const ADD_GROUP_MEMBER = 'ADD_GROUP_MEMBER';
+export const SET_GROUP_MEMBERS = 'SET_GROUP_MEMBERS';
+export const UPDATE_GROUP = 'UPDATE_GROUP';
+export const DELETE_GROUP = 'DELETE_GROUP';

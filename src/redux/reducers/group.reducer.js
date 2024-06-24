@@ -1,9 +1,16 @@
-import { SET_GROUPS, SET_OTHER_GROUPS, SET_GROUP_DETAILS, SET_ERROR } from '../actions/types';
+import {
+  SET_GROUPS,
+  SET_OTHER_GROUPS,
+  SET_GROUP_DETAILS,
+  SET_ERROR,
+  SET_GROUP_MESSAGES,
+} from '../actions/types';
 
 const initialState = {
   userGroups: [],
   otherGroups: [],
   groupDetails: null,
+  messages: [],
   error: null,
 };
 
@@ -15,6 +22,8 @@ const groupReducer = (state = initialState, action) => {
       return { ...state, otherGroups: action.payload };
     case SET_GROUP_DETAILS:
       return { ...state, groupDetails: action.payload };
+    case SET_GROUP_MESSAGES:
+      return { ...state, messages: action.payload };
     case SET_ERROR:
       return { ...state, error: action.payload };
     default:

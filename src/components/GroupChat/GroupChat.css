@@ -1,0 +1,49 @@
+/* src/components/GroupChat/GroupChat.css */
+
+.group-chat-container {
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.messages {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 5px 10px;
+  border-bottom: 1px solid #444;
+}
+
+.message strong {
+  color: #ffd700;
+}
+
+form {
+  display: flex;
+}
+
+input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 4px 0 0 4px;
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #ffd700;
+  color: #1c1c1c;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e6c200;
+}

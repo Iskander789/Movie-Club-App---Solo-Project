@@ -1,16 +1,18 @@
+// src/components/GroupDetailsPage/GroupDetailsPage.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchGroupDetails, updateGroup, deleteGroup } from '../../redux/actions/groupActions';
+import GroupChat from '../GroupChat/GroupChat';
 import './GroupDetailsPage.css';
 
 function GroupDetailsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  const group = useSelector((store) => store.group.groupDetails);
-  const user = useSelector((store) => store.user);
-  const [isEditing, setIsEditing] = useState(false);
+  const groupDetails = useSelector((store) => store.group.groupDetails);
+  const [editing, setEditing] = useState(false);
   const [groupName, setGroupName] = useState('');
   const [groupDescription, setGroupDescription] = useState('');
 
@@ -19,23 +21,15 @@ function GroupDetailsPage() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (group) {
-      setGroupName(group.name);
-      setGroupDescription(group.description);
+    if (groupDetails) {
+      setGroupName(groupDetails.groupDetails.name);
+      setGroupDescription(groupDetails.groupDetails.description);
     }
-  }, [group]);
+  }, [groupDetails]);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
-
-  const handleSave = () => {
+  const handleUpdate = () => {
     dispatch(updateGroup(id, { name: groupName, description: groupDescription }));
-    setIsEditing(false);
+    setEditing(false);
   };
 
   const handleDelete = () => {
@@ -43,54 +37,41 @@ function GroupDetailsPage() {
     history.push('/groups');
   };
 
-  const handleBack = () => {
-    history.push('/groups');
-  };
-
   return (
     <div className="group-details-container">
-      {group ? (
+      {groupDetails ? (
         <>
-          <h2>Group Details</h2>
-          {isEditing ? (
+          {editing ? (
             <>
-              <div className="form-group">
-                <label htmlFor="groupName">Group Name:</label>
-                <input
-                  id="groupName"
-                  type="text"
-                  className="form-input"
-                  value={groupName}
-                  onChange={(e) => setGroupName(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="groupDescription">Group Description:</label>
-                <textarea
-                  id="groupDescription"
-                  className="form-input"
-                  value={groupDescription}
-                  onChange={(e) => setGroupDescription(e.target.value)}
-                />
-              </div>
-              <div className="form-actions">
-                <button onClick={handleSave} className="btn btn-primary">Save</button>
-                <button onClick={handleCancel} className="btn btn-secondary">Cancel</button>
-              </div>
+              <input
+                type="text"
+                value={groupName}
+                onChange={(e) => setGroupName(e.target.value)}
+              />
+              <textarea
+                value={groupDescription}
+                onChange={(e) => setGroupDescription(e.target.value)}
+              />
+              <button onClick={handleUpdate} className="btn btn-primary">Save</button>
+              <button onClick={() => setEditing(false)} className="btn btn-secondary">Cancel</button>
             </>
           ) : (
             <>
-              <p><strong>Name:</strong> {group.name}</p>
-              <p><strong>Description:</strong> {group.description}</p>
-              {group.user_id === user.id && (
-                <div className="form-actions">
-                  <button onClick={handleEdit} className="btn btn-primary">Edit</button>
-                  <button onClick={handleDelete} className="btn btn-secondary">Delete</button>
-                </div>
-              )}
+              <h2>{groupDetails.groupDetails.name}</h2>
+              <p>{groupDetails.groupDetails.description}</p>
+              <p><strong>Group Leader:</strong> {groupDetails.groupLeader.username}</p>
+              <p><strong>Members:</strong></p>
+              <ul>
+                {groupDetails.groupMembers.map((member) => (
+                  <li key={member.id}>{member.username}</li>
+                ))}
+              </ul>
+              <button onClick={() => setEditing(true)} className="btn btn-primary">Edit</button>
+              <button onClick={handleDelete} className="btn btn-danger">Delete Group</button>
             </>
           )}
-          <button onClick={handleBack} className="btn btn-secondary back-button">Back</button>
+          <GroupChat groupId={id} />
+          <button onClick={() => history.push('/groups')} className="btn btn-secondary">Back</button>
         </>
       ) : (
         <p>Loading...</p>
