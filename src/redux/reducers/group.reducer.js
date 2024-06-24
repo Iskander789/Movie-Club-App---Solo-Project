@@ -1,8 +1,9 @@
-import { SET_GROUPS, SET_OTHER_GROUPS } from '../actions/types';
+import { SET_GROUPS, SET_OTHER_GROUPS, SET_GROUP_DETAILS } from '../actions/types';
 
 const initialState = {
   userGroups: [],
   otherGroups: [],
+  currentGroup: null,
 };
 
 export default function groupReducer(state = initialState, action) {
@@ -11,6 +12,8 @@ export default function groupReducer(state = initialState, action) {
       return { ...state, userGroups: action.payload };
     case SET_OTHER_GROUPS:
       return { ...state, otherGroups: action.payload };
+    case SET_GROUP_DETAILS:
+      return { ...state, currentGroup: action.payload };
     default:
       return state;
   }

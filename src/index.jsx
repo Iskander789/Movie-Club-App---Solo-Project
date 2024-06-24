@@ -1,5 +1,3 @@
-// src/index.jsx
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -9,7 +7,7 @@ import { logger } from 'redux-logger';
 import AppWithRouter from './components/App/App';
 import rootReducer from './redux/reducers/_root.reducer';
 import rootSaga from './redux/sagas/_root.saga';
-import './global.css'; 
+import './styles.css';  
 
 const sagaMiddleware = createSagaMiddleware();
 
