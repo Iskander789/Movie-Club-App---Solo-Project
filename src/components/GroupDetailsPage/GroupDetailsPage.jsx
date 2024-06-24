@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchGroupDetails, updateGroup, deleteGroup } from '../../redux/actions/groupActions';
@@ -8,27 +8,34 @@ function GroupDetailsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  const groupDetails = useSelector((store) => store.group.groupDetails);
+  const group = useSelector((store) => store.group.groupDetails);
   const user = useSelector((store) => store.user);
-
-  const [editMode, setEditMode] = useState(false);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [groupName, setGroupName] = useState('');
+  const [groupDescription, setGroupDescription] = useState('');
 
   useEffect(() => {
     dispatch(fetchGroupDetails(id));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (groupDetails) {
-      setName(groupDetails.name);
-      setDescription(groupDetails.description);
+    if (group) {
+      setGroupName(group.name);
+      setGroupDescription(group.description);
     }
-  }, [groupDetails]);
+  }, [group]);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
 
   const handleSave = () => {
-    dispatch(updateGroup(id, { name, description }));
-    setEditMode(false);
+    dispatch(updateGroup(id, { name: groupName, description: groupDescription }));
+    setIsEditing(false);
   };
 
   const handleDelete = () => {
@@ -36,38 +43,54 @@ function GroupDetailsPage() {
     history.push('/groups');
   };
 
+  const handleBack = () => {
+    history.push('/groups');
+  };
+
   return (
     <div className="group-details-container">
-      {groupDetails ? (
+      {group ? (
         <>
-          {editMode ? (
+          <h2>Group Details</h2>
+          {isEditing ? (
             <>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Group Name"
-              />
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Group Description"
-              />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={() => setEditMode(false)}>Cancel</button>
+              <div className="form-group">
+                <label htmlFor="groupName">Group Name:</label>
+                <input
+                  id="groupName"
+                  type="text"
+                  className="form-input"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="groupDescription">Group Description:</label>
+                <textarea
+                  id="groupDescription"
+                  className="form-input"
+                  value={groupDescription}
+                  onChange={(e) => setGroupDescription(e.target.value)}
+                />
+              </div>
+              <div className="form-actions">
+                <button onClick={handleSave} className="btn btn-primary">Save</button>
+                <button onClick={handleCancel} className="btn btn-secondary">Cancel</button>
+              </div>
             </>
           ) : (
             <>
-              <h2>{groupDetails.name}</h2>
-              <p>{groupDetails.description}</p>
-              {groupDetails.user_id === user.id && (
-                <>
-                  <button onClick={() => setEditMode(true)}>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
-                </>
+              <p><strong>Name:</strong> {group.name}</p>
+              <p><strong>Description:</strong> {group.description}</p>
+              {group.user_id === user.id && (
+                <div className="form-actions">
+                  <button onClick={handleEdit} className="btn btn-primary">Edit</button>
+                  <button onClick={handleDelete} className="btn btn-secondary">Delete</button>
+                </div>
               )}
             </>
           )}
+          <button onClick={handleBack} className="btn btn-secondary back-button">Back</button>
         </>
       ) : (
         <p>Loading...</p>
