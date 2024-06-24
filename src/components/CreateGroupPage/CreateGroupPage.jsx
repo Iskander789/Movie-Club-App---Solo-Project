@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createGroup } from '../../redux/actions/groupActions';
 import './CreateGroupPage.css';
@@ -7,25 +7,29 @@ import './CreateGroupPage.css';
 function CreateGroupPage() {
   const [groupName, setGroupName] = useState('');
   const [groupDescription, setGroupDescription] = useState('');
-  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
+  const error = useSelector((store) => store.group.error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!groupName || !groupDescription) {
-      setError('All fields are required');
+      alert('All fields are required');
       return;
     }
-    dispatch(createGroup({ name: groupName, description: groupDescription }));
-    history.push('/groups');
+    dispatch(createGroup({ name: groupName, description: groupDescription, history }));
   };
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
 
   return (
     <div className="create-group-container">
       <h2>Create a New Group</h2>
       <form className="create-group-form" onSubmit={handleSubmit}>
-        {error && <p className="error-message">{error}</p>}
         <div className="form-group">
           <label htmlFor="groupName">Group Name:</label>
           <input
@@ -46,10 +50,10 @@ function CreateGroupPage() {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" className="btn-primary">Create Group</button>
+          <button type="submit" className="btn btn-primary">Create Group</button>
           <button
             type="button"
-            className="btn-secondary"
+            className="btn btn-secondary"
             onClick={() => history.push('/groups')}
           >
             Cancel

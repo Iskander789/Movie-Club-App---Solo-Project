@@ -1,19 +1,30 @@
-import { SET_GROUPS, SET_OTHER_GROUPS, SET_GROUP_DETAILS } from '../actions/types';
+import { SET_GROUPS, SET_OTHER_GROUPS, SET_ERROR } from '../actions/types';
 
 const initialState = {
   userGroups: [],
   otherGroups: [],
-  currentGroup: null,
+  error: ''
 };
 
-export default function groupReducer(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case SET_GROUPS:
-      return { ...state, userGroups: action.payload };
+      return {
+        ...state,
+        userGroups: action.payload,
+        error: '' // Clear any existing errors
+      };
     case SET_OTHER_GROUPS:
-      return { ...state, otherGroups: action.payload };
-    case SET_GROUP_DETAILS:
-      return { ...state, currentGroup: action.payload };
+      return {
+        ...state,
+        otherGroups: action.payload,
+        error: '' // Clear any existing errors
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

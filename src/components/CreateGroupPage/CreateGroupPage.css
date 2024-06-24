@@ -3,69 +3,70 @@
     background-color: #2a2a2a;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .create-group-form {
+}
+
+.create-group-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .form-group {
+}
+
+.form-group {
     margin-bottom: 15px;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     margin-bottom: 5px;
     color: #ffd700;
-  }
-  
-  .form-input {
+}
+
+.form-input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
     background-color: #3a3a3a;
     color: #f0f0f0;
-  }
-  
-  .form-input:focus {
+}
+
+.form-input:focus {
     border-color: #ffd700;
     outline: none;
     box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-  }
-  
-  .form-actions {
+}
+
+.form-actions {
     display: flex;
     justify-content: space-between;
-  }
-  
-  .btn-primary {
-    font-size: 0.75rem; /* Smaller font size */
-    padding: 5px 10px;  /* Smaller padding */
+}
+
+.btn-primary {
+    font-size: 0.875rem;
+    padding: 10px 20px;
     background-color: #ffd700;
     color: #1c1c1c;
     border: 1px solid #ffd700;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .btn-primary:hover {
+    width: auto; /* Ensure button is auto-sized */
+}
+
+.btn-primary:hover {
     background-color: #e6c200;
     border-color: #e6c200;
-  }
-  
-  .btn-secondary {
-    font-size: 0.75rem; /* Smaller font size */
-    padding: 5px 10px;  /* Smaller padding */
-    background-color: #444;
+}
+
+.btn-secondary {
+    font-size: 0.875rem;
+    padding: 10px 20px;
+    background-color: #ff6347;
     color: #f0f0f0;
-    border: 1px solid #444;
+    border: 1px solid #ff6347;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #555;
-    border-color: #555;
-  }
-  
+    width: auto; /* Ensure button is auto-sized */
+}
+
+.btn-secondary:hover {
+    background-color: #e55347;
+    border-color: #e55347;
+}
