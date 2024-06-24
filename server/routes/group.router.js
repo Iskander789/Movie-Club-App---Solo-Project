@@ -1,11 +1,9 @@
-// server/routes/group.router.js
-
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// Route to fetch user groups
+// Fetch user groups
 router.get('/user', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM groups WHERE user_id = $1`;
   pool.query(queryText, [req.user.id])
@@ -16,7 +14,7 @@ router.get('/user', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// Route to fetch other groups
+// Fetch other groups
 router.get('/other', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM groups WHERE user_id != $1`;
   pool.query(queryText, [req.user.id])
@@ -27,7 +25,18 @@ router.get('/other', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// Route to create a new group
+// Fetch group details
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM groups WHERE id = $1`;
+  pool.query(queryText, [req.params.id])
+    .then((result) => res.send(result.rows[0]))
+    .catch((error) => {
+      console.error('Error fetching group details:', error);
+      res.sendStatus(500);
+    });
+});
+
+// Create a new group
 router.post('/', rejectUnauthenticated, (req, res) => {
   const { name, description } = req.body;
   const queryText = `INSERT INTO groups (name, description, user_id) VALUES ($1, $2, $3) RETURNING id`;
@@ -39,18 +48,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// Route to fetch group details
-router.get('/:id', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM groups WHERE id = $1`;
-  pool.query(queryText, [req.params.id])
-    .then((result) => {
-      if (result.rows.length === 0) {
-        return res.sendStatus(404);
-      }
-      res.send(result.rows[0]);
-    })
+// Update a group
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  const { name, description } = req.body;
+  const queryText = `UPDATE groups SET name = $1, description = $2 WHERE id = $3 AND user_id = $4`;
+  pool.query(queryText, [name, description, req.params.id, req.user.id])
+    .then(() => res.sendStatus(204))
     .catch((error) => {
-      console.error('Error fetching group details:', error);
+      console.error('Error updating group:', error);
+      res.sendStatus(500);
+    });
+});
+
+// Delete a group
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `DELETE FROM groups WHERE id = $1 AND user_id = $2`;
+  pool.query(queryText, [req.params.id, req.user.id])
+    .then(() => res.sendStatus(204))
+    .catch((error) => {
+      console.error('Error deleting group:', error);
       res.sendStatus(500);
     });
 });
