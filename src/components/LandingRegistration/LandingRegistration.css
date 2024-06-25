@@ -1,119 +1,111 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
-  margin: 0;
-  background-color: #1c1c1c; /* Match the background color */
-}
-
-#react-root {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.nav {
-  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #1c1c1c;
-  padding: 10px 20px;
-  border-bottom: 2px solid #ffd700;
-  display: flex;
-  justify-content: center;
+  color: #f0f0f0;
 }
 
-.nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #ffd700;
-  text-align: center;
-}
-
-.outer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 40px); /* Adjust the height based on the nav height */
-}
-
+/* Container */
 .landing-container {
-  width: 100%;
-  max-width: 1200px;
-  padding: 20px;
-  background-color: #2a2a2a;
-  border-radius: 8px;
-}
-
-.centered-header {
-  text-align: center;
-}
-
-.content-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-}
-
-.container {
-  padding: 20px;
-}
-
-.grid {
-  display: flex;
-  gap: 20px;
-}
-
-.grid-col_8 {
-  flex: 8;
-  color: #f2f2f2; /* Light grey color for better readability */
-}
-
-.grid-col_4 {
-  flex: 4;
-  text-align: right;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1c1c1c;
+  margin: 0;
+  padding: 0;
 }
 
 .formPanel {
-  background: #1c1c1c; /* Dark background for form to match the overall theme */
-  color: #f2f2f2; /* Light grey color for form text */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #2a2a2a; /* Inner rectangle color */
+  padding: 30px; /* Increased padding */
+  border-radius: 10px; /* Rounded corners */
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid #ffd700; /* Border for inner rectangle */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced box shadow */
+  box-sizing: border-box;
 }
 
 h2 {
-  font-size: 24px;
-  color: #ffd700; /* Gold color for heading */
-  text-align: center; /* Center the heading */
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd700;
+  font-size: 24px; /* Increased font size */
 }
 
-p {
-  color: #f2f2f2; /* Light grey color for paragraph text */
+.alert {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px; /* Added space below alert */
 }
 
-ul {
-  padding-left: 20px;
-  color: #f2f2f2; /* Light grey color for list items */
+label {
+  color: #f2f2f2;
+  font-size: 14px; /* Updated font size */
+  display: block;
+  margin-bottom: 8px; /* Added margin for better spacing */
 }
 
-ul li {
-  margin-bottom: 10px;
+.form-group {
+  margin-bottom: 20px; /* Ensure space between input fields */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  margin-bottom: 10px; /* Increased margin for better spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #333;
+  color: #f2f2f2;
+  font-size: 14px; /* Updated font size */
+}
+
+input[type="submit"],
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  background-color: #ffd700;
+  color: #1c1c1c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px; /* Updated font size */
+  margin-top: 10px; /* Added margin for spacing */
+}
+
+input[type="submit"]:hover,
+.btn:hover {
+  background-color: #e5c100;
+}
+
+.login-section {
+  text-align: center;
+  margin-top: 20px; /* Ensure space between register and login sections */
 }
 
 .btn_asLink {
   background: none;
-  color: #ffd700;
   border: none;
-  padding: 0;
-  font: inherit;
+  color: #ffd700;
   cursor: pointer;
   text-decoration: underline;
+  font-size: 14px; /* Updated font size */
 }
 
 .btn_asLink:hover {
   color: #e5c100;
-}
-
-.center-text {
-  text-align: center;
 }

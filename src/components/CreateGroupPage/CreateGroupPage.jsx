@@ -1,64 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { createGroup } from '../../redux/actions/groupActions';
 import './CreateGroupPage.css';
 
 function CreateGroupPage() {
-  const [groupName, setGroupName] = useState('');
-  const [groupDescription, setGroupDescription] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
-  const error = useSelector((store) => store.group.error);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const errorMessage = useSelector((store) => store.group.errorMessage);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!groupName || !groupDescription) {
-      alert('All fields are required');
-      return;
-    }
-    dispatch(createGroup({ name: groupName, description: groupDescription, history }));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createGroup({ name, description }));
   };
-
-  useEffect(() => {
-    if (error) {
-      alert(error);
-    }
-  }, [error]);
 
   return (
     <div className="create-group-container">
       <h2>Create a New Group</h2>
-      <form className="create-group-form" onSubmit={handleSubmit}>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <form onSubmit={handleSubmit} className="create-group-form">
         <div className="form-group">
-          <label htmlFor="groupName">Group Name:</label>
+          <label htmlFor="name">Group Name:</label>
           <input
-            id="groupName"
             type="text"
-            className="form-input"
-            value={groupName}
-            onChange={(e) => setGroupName(e.target.value)}
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="groupDescription">Group Description:</label>
+          <label htmlFor="description">Description:</label>
           <textarea
-            id="groupDescription"
-            className="form-input"
-            value={groupDescription}
-            onChange={(e) => setGroupDescription(e.target.value)}
-          />
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></textarea>
         </div>
-        <div className="form-actions">
-          <button type="submit" className="btn btn-primary">Create Group</button>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => history.push('/groups')}
-          >
-            Cancel
-          </button>
-        </div>
+        <button type="submit" className="btn btn-primary">Create Group</button>
       </form>
     </div>
   );

@@ -22,8 +22,8 @@ function GroupDetailsPage() {
 
   useEffect(() => {
     if (groupDetails) {
-      setGroupName(groupDetails.groupDetails.name);
-      setGroupDescription(groupDetails.groupDetails.description);
+      setGroupName(groupDetails.name || '');
+      setGroupDescription(groupDetails.description || '');
     }
   }, [groupDetails]);
 
@@ -57,14 +57,18 @@ function GroupDetailsPage() {
             </>
           ) : (
             <>
-              <h2>{groupDetails.groupDetails.name}</h2>
-              <p>{groupDetails.groupDetails.description}</p>
-              <p><strong>Group Leader:</strong> {groupDetails.groupLeader.username}</p>
+              <h2>{groupDetails.name}</h2>
+              <p>{groupDetails.description}</p>
+              <p><strong>Group Leader:</strong> {groupDetails.groupLeader ? groupDetails.groupLeader.username : 'Loading...'}</p>
               <p><strong>Members:</strong></p>
               <ul>
-                {groupDetails.groupMembers.map((member) => (
-                  <li key={member.id}>{member.username}</li>
-                ))}
+                {groupDetails.groupMembers && groupDetails.groupMembers.length > 0 ? (
+                  groupDetails.groupMembers.map((member) => (
+                    <li key={member.id}>{member.username}</li>
+                  ))
+                ) : (
+                  <p>No members yet.</p>
+                )}
               </ul>
               <button onClick={() => setEditing(true)} className="btn btn-primary">Edit</button>
               <button onClick={handleDelete} className="btn btn-danger">Delete Group</button>

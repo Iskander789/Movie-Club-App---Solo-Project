@@ -101,9 +101,9 @@
   
   input {
     display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 10px 10px 0;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
@@ -326,5 +326,97 @@
   
   .register-formPanel .btn:hover {
     background-color: #e6c200;
+  }
+  
+  .landing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1c1c1c;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .landing-container .formPanel {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #ffd700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .landing-container .formPanel h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffd700;
+    font-size: 24px;
+  }
+  
+  .landing-container .formPanel .alert {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .landing-container .formPanel .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .landing-container .formPanel label {
+    color: #f2f2f2;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .landing-container .formPanel input[type="text"],
+  .landing-container .formPanel input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #f2f2f2;
+    font-size: 14px;
+  }
+  
+  .landing-container .formPanel .btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffd700;
+    color: #1c1c1c;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .landing-container .formPanel .btn:hover {
+    background-color: #e5c100;
+  }
+  
+  .landing-container .formPanel .login-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .landing-container .formPanel .btn_asLink {
+    background: none;
+    border: none;
+    color: #ffd700;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+  }
+  
+  .landing-container .formPanel .btn_asLink:hover {
+    color: #e5c100;
   }
   

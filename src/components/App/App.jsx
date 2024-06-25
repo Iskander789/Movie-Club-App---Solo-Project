@@ -33,6 +33,15 @@ function App() {
     }
   }, [redirect, history, dispatch]);
 
+  useEffect(() => {
+    const handleLogout = () => {
+      history.push('/landing');
+    };
+    if (!user.id) {
+      handleLogout();
+    }
+  }, [user, history]);
+
   return (
     <div>
       <Nav />

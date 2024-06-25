@@ -1,3 +1,5 @@
+// src/redux/sagas/user.saga.js
+
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import { FETCH_USER, SET_USER, UNSET_USER, LOGIN, REGISTER, LOGOUT } from '../actions/types';
@@ -24,7 +26,9 @@ function* loginUser(action) {
 function* registerUser(action) {
   try {
     yield call(axios.post, '/api/user/register', action.payload);
-    yield put({ type: LOGIN, payload: { username: action.payload.username, password: action.payload.password } });
+    if (action.callback) {
+      action.callback();
+    }
   } catch (error) {
     console.error('User registration failed', error);
   }

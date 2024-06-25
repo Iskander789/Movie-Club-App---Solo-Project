@@ -1,47 +1,38 @@
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
+CREATE TABLE session (
+    sid character varying PRIMARY KEY,
+    sess json NOT NULL,
+    expire timestamp(6) without time zone NOT NULL
+);
+
 CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
-    "email" VARCHAR (255),
-    "profile_picture" VARCHAR (255),
-    "group_name" VARCHAR (80),
-    "is_leader" BOOLEAN DEFAULT FALSE
+    id SERIAL PRIMARY KEY,
+    username character varying(80) NOT NULL UNIQUE,
+    password character varying(1000) NOT NULL,
+    email character varying(255),
+    profile_picture character varying(255),
+    group_name character varying(80),
+    is_leader boolean DEFAULT false
 );
-
-
-CREATE TABLE "session" (
-  "sid" VARCHAR NOT NULL COLLATE "default",
-  "sess" JSON NOT NULL,
-  "expire" TIMESTAMP(6) NOT NULL,
-  PRIMARY KEY ("sid")
-);
-
-CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 CREATE TABLE groups (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  description TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    name character varying(255) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE group_members (
-  id SERIAL PRIMARY KEY,
-  group_id INT REFERENCES groups(id) ON DELETE CASCADE,
-  user_id INT REFERENCES "user"(id) ON DELETE CASCADE,
-  is_leader BOOLEAN DEFAULT FALSE,
-  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id integer REFERENCES "user"(id) ON DELETE CASCADE,
+    group_id integer REFERENCES groups(id) ON DELETE CASCADE,
+    is_leader boolean DEFAULT false,
+    CONSTRAINT group_members_pkey PRIMARY KEY (user_id, group_id)
 );
 
-CREATE TABLE movies (
-  id SERIAL PRIMARY KEY,
-  group_id INT REFERENCES groups(id) ON DELETE CASCADE,
-  title VARCHAR(255) NOT NULL,
-  added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    group_id integer NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+    user_id integer NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+    text text NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
-
 

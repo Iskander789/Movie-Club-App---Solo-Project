@@ -40,7 +40,6 @@ router.get('/other', rejectUnauthenticated, (req, res) => {
 });
 
 // Route to fetch group details
-// Route to fetch group details
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
     const groupId = req.params.id;
     const client = await pool.connect();
@@ -83,7 +82,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
-
 // Route to fetch group messages
 router.get('/:id/messages', rejectUnauthenticated, (req, res) => {
     const groupId = req.params.id;
@@ -106,6 +104,17 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     try {
         await client.query('BEGIN');
+
+        // Check if group name already exists
+        const checkQuery = 'SELECT id FROM groups WHERE name = $1';
+        const checkResult = await client.query(checkQuery, [name]);
+
+        if (checkResult.rows.length > 0) {
+            await client.query('ROLLBACK');
+            res.status(400).send({ error: 'Group name already exists' });
+            return;
+        }
+
         const groupQuery = `
       INSERT INTO groups (name, description) 
       VALUES ($1, $2) 

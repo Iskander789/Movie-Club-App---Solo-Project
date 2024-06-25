@@ -1,25 +1,24 @@
 // src/components/GroupChat/GroupChat.jsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGroupMessages, postMessage } from '../../redux/actions/groupActions';
 import './GroupChat.css';
 
 function GroupChat({ groupId }) {
   const dispatch = useDispatch();
-  const messages = useSelector((store) => store.group.messages);
-  const user = useSelector((store) => store.user);
-  const [newMessage, setNewMessage] = useState('');
+  const groupMessages = useSelector((store) => store.group.groupMessages || []);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     dispatch(fetchGroupMessages(groupId));
   }, [dispatch, groupId]);
 
-  const handleSendMessage = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (newMessage.trim() !== '') {
-      dispatch(postMessage(groupId, { text: newMessage, user_id: user.id }));
-      setNewMessage('');
+    if (message.trim()) {
+      dispatch(postMessage({ groupId, message: { text: message } }));
+      setMessage('');
     }
   };
 
@@ -27,20 +26,25 @@ function GroupChat({ groupId }) {
     <div className="group-chat-container">
       <h3>Group Chat</h3>
       <div className="messages">
-        {messages.map((message) => (
-          <div key={message.id} className="message">
-            <strong>{message.username}:</strong> {message.text}
-          </div>
-        ))}
+        {groupMessages.length > 0 ? (
+          groupMessages.map((msg) => (
+            <div key={msg.id} className="message">
+              <strong>{msg.username}: </strong>
+              <span>{msg.text}</span>
+            </div>
+          ))
+        ) : (
+          <p>No messages yet. Start the conversation!</p>
+        )}
       </div>
-      <form onSubmit={handleSendMessage}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
         />
-        <button type="submit">Send</button>
+        <button type="submit" className="btn btn-primary">Send</button>
       </form>
     </div>
   );
