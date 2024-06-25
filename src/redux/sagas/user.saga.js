@@ -16,7 +16,6 @@ function* loginUser(action) {
 function* registerUser(action) {
   try {
     yield call(axios.post, '/api/user/register', action.payload);
-    yield put({ type: SET_USER, payload: action.payload });
     yield put({ type: REDIRECT, payload: '/login' });
   } catch (error) {
     console.log('Error registering user', error);

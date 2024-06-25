@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { FETCH_USER, CLEAR_REDIRECT } from '../../redux/actions/types';
@@ -7,20 +7,22 @@ import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserPage from '../UserPage/UserPage';
 import GroupsPage from '../GroupsPage/GroupsPage';
-import UserProfile from '../UserProfile/UserProfile';
-import AboutThisApp from '../AboutThisApp/AboutThisApp';
-import TechnologiesUsed from '../TechnologiesUsed/TechnologiesUsed';
+import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
+import GroupDetailsPage from '../GroupDetailsPage/GroupDetailsPage';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const dispatch = useDispatch();
   const redirect = useSelector((state) => state.user.redirect);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user.id) {
       console.log('Fetching user because user.id is null');
       dispatch({ type: FETCH_USER });
+    } else {
+      setLoading(false);
     }
   }, [dispatch, user.id]);
 
@@ -30,6 +32,10 @@ function App() {
       dispatch({ type: CLEAR_REDIRECT });
     }
   }, [redirect, dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!user.id && window.location.pathname !== '/login' && window.location.pathname !== '/') {
     console.log('User not logged in, redirecting to /login');
@@ -45,9 +51,8 @@ function App() {
         <Route exact path="/login" component={LoginPage} />
         <ProtectedRoute exact path="/home" component={UserPage} />
         <ProtectedRoute exact path="/groups" component={GroupsPage} />
-        <ProtectedRoute exact path="/profile" component={UserProfile} />
-        <ProtectedRoute exact path="/about" component={AboutThisApp} />
-        <ProtectedRoute exact path="/technologies-used" component={TechnologiesUsed} />
+        <ProtectedRoute exact path="/groups/create" component={CreateGroupPage} />
+        <ProtectedRoute exact path="/groups/:id" component={GroupDetailsPage} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>

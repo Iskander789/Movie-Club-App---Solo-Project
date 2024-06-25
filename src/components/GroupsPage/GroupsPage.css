@@ -3,39 +3,27 @@
 .groups-page-container {
   padding: 20px;
   background-color: #2a2a2a;
-  border-radius: 10px;
-  max-width: 800px;
-  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #f0f0f0;
 }
 
-.groups-page-container h1,
 .groups-page-container h2 {
   color: #ffd700;
-  text-align: center;
-  margin-bottom: 20px;
 }
 
-.create-group-button {
-  display: block;
-  width: 200px;
-  margin: 20px auto;
+.groups-page-container .btn {
   padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 4px;
   background-color: #ffd700;
   color: #1c1c1c;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.create-group-button:hover {
-  background-color: #e5c100;
-}
-
-.groups-section {
-  margin-bottom: 30px;
+.groups-page-container .btn:hover {
+  background-color: #e6c200;
 }
 
 .groups-list {
@@ -44,27 +32,24 @@
   gap: 15px;
 }
 
-.group-item {
+.group-card {
   padding: 15px;
-  border: 1px solid #ffd700;
-  border-radius: 5px;
-  background-color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
-.group-link {
-  font-size: 1.5rem;
+.group-card:hover {
+  background-color: #4a4a4a;
+}
+
+.group-card h3 {
+  margin: 0 0 10px;
   color: #ffd700;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 10px;
 }
 
-.group-link:hover {
-  color: #e5c100;
-}
-
-.group-item p {
-  color: #ccc;
+.group-card p {
   margin: 0;
+  color: #f0f0f0;
 }

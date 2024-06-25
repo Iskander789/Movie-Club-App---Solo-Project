@@ -1,3 +1,5 @@
+// server/routes/group.router.js
+
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');

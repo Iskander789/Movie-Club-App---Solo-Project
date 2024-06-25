@@ -1,3 +1,5 @@
+// src/redux/sagas/group.saga.js
+
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import {
@@ -13,7 +15,6 @@ import {
   SET_GROUP_MESSAGES,
   POST_MESSAGE,
   ADD_GROUP_MEMBER,
-  SET_GROUP_MEMBERS,
   UPDATE_GROUP,
   DELETE_GROUP,
   SET_REDIRECT,
@@ -49,7 +50,7 @@ function* createGroupSaga(action) {
     yield call(axios.post, '/api/groups', action.payload);
     yield put({ type: FETCH_GROUPS });
     yield put({ type: FETCH_OTHER_GROUPS });
-    yield put({ type: SET_REDIRECT, payload: '/groups' });
+    yield put({ type: SET_REDIRECT, payload: '/groups' }); // Redirect to /groups
     yield put({ type: SET_SUCCESS_MESSAGE, payload: 'Group creation was successful!' });
   } catch (error) {
     console.error('Error creating group:', error);

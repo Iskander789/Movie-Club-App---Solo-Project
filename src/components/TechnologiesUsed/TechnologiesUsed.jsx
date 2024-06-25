@@ -35,9 +35,6 @@ function TechnologiesUsed() {
             <strong>Vite:</strong> A build tool that provides a faster and leaner development experience for modern web projects. It is used for bundling the application during development and production.
           </li>
         </ul>
-        <p>
-          This project is structured to follow best practices in web development, ensuring a maintainable and scalable codebase. We hope you enjoy exploring and using the Movie Club App!
-        </p>
       </div>
     </div>
   );
