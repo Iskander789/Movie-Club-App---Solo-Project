@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER } from '../../redux/actions/types';
-import { useHistory } from 'react-router-dom';
 import './RegisterForm.css';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const errors = useSelector((store) => store.errors);
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -27,15 +25,9 @@ function RegisterForm() {
     setPassword('');
   };
 
-  // Ensure inputs are not pre-populated on component mount
-  useEffect(() => {
-    setUsername('');
-    setPassword('');
-  }, []);
-
   return (
     <div className="register-form-container">
-      <form className="formPanel" onSubmit={registerUser} autoComplete="off" key="registerForm">
+      <form className="formPanel" onSubmit={registerUser} autoComplete="off">
         <h2>Register User</h2>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">

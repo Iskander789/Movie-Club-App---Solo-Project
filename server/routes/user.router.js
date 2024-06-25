@@ -8,17 +8,23 @@ const multer = require('multer');
 const router = express.Router();
 
 // Handles POST request with new user data
-router.post('/register', (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
   const queryText = `INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id`;
-  pool.query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('User registration failed: ', err);
-      res.sendStatus(500);
-    });
+  try {
+    const result = await pool.query(queryText, [username, password]);
+    res.status(201).send(result.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') { // PostgreSQL error code for unique violation
+      res.status(409).json({ error: 'Username already taken' });
+    } else {
+      console.error('User registration failed: ', error.message); // Log the detailed error message
+      console.error('Stack trace: ', error.stack); // Log the stack trace for debugging
+      res.status(500).json({ error: 'User registration failed. Please try again.' });
+    }
+  }
 });
 
 // Handles login form authenticate/login POST
