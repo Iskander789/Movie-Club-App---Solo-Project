@@ -10,9 +10,6 @@ function Nav() {
 
   const isLoggedIn = Boolean(user.id);
 
-  console.log("User:", user); // Add this line to log the user state
-  console.log("Is Logged In:", isLoggedIn); // Add this line to check the login status
-
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
   };
@@ -20,7 +17,7 @@ function Nav() {
   return (
     <nav className="nav">
       <div className="nav-title">
-        <Link to={isLoggedIn ? "/home" : "/landing"} className="nav-title-link">
+        <Link to={isLoggedIn ? "/home" : "/"} className="nav-title-link">
           Movie Club
         </Link>
       </div>

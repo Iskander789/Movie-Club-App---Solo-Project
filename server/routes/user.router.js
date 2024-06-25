@@ -36,8 +36,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  req.logout();
-  res.sendStatus(200);
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.sendStatus(200);
+  });
 });
 
 module.exports = router;

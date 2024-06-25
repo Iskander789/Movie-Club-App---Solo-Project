@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { LOGIN, REGISTER, FETCH_USER, SET_USER, REDIRECT, REGISTRATION_FAILED, LOGIN_FAILED, UNSET_USER } from '../actions/types';
+import { LOGIN, REGISTER, FETCH_USER, SET_USER, REDIRECT, REGISTRATION_FAILED, LOGIN_FAILED, UNSET_USER, LOGOUT } from '../actions/types';
 
 function* loginUser(action) {
   try {
@@ -20,7 +20,7 @@ function* registerUser(action) {
     yield put({ type: REDIRECT, payload: '/login' });
   } catch (error) {
     console.log('Error registering user', error);
-    if (error.response.status === 409) {
+    if (error.response && error.response.status === 409) {
       yield put({ type: REGISTRATION_FAILED, payload: 'Username already taken' });
     } else {
       yield put({ type: REGISTRATION_FAILED, payload: 'Registration failed. Please try again.' });
@@ -38,10 +38,21 @@ function* fetchUser() {
   }
 }
 
+function* logoutUser() {
+  try {
+    yield call(axios.post, '/api/user/logout');
+    yield put({ type: UNSET_USER });
+    yield put({ type: REDIRECT, payload: '/login' });
+  } catch (error) {
+    console.log('Error logging out', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest(LOGIN, loginUser);
   yield takeLatest(REGISTER, registerUser);
   yield takeLatest(FETCH_USER, fetchUser);
+  yield takeLatest(LOGOUT, logoutUser);
 }
 
 export default userSaga;
