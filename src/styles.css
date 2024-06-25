@@ -108,6 +108,8 @@
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
+    background-color: #333;
+    color: #f0f0f0;
   }
   
   input:focus {
@@ -198,13 +200,14 @@
   }
   
   .login-formPanel {
-    background-color: #1c1c1c;
+    background-color: #2a2a2a; /* Differentiate the panel from the background */
     padding: 20px;
     border-radius: 5px;
     width: 100%;
     max-width: 400px;
     border: none;
     box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .login-formPanel h2 {
@@ -216,19 +219,43 @@
   .login-formPanel .alert {
     color: red;
     text-align: center;
+    margin-bottom: 10px;
   }
   
-  .login-formPanel .btn_asLink {
-    background: none;
-    border: none;
+  .login-formPanel .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .login-formPanel label {
+    display: block;
+    margin-bottom: 5px;
     color: #ffd700;
-    cursor: pointer;
-    text-decoration: underline;
+  }
+  
+  .login-formPanel input[type="text"],
+  .login-formPanel input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
     font-size: 1rem;
   }
   
-  .login-formPanel .btn_asLink:hover {
-    color: #e6c200;
+  .login-formPanel .btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffd700;
+    color: #1c1c1c;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-formPanel .btn:hover {
+    background-color: #e6c200;
   }
   
   /* Register Page */
@@ -243,13 +270,14 @@
   }
   
   .register-formPanel {
-    background-color: #1c1c1c;
+    background-color: #2a2a2a; /* Differentiate the panel from the background */
     padding: 20px;
     border-radius: 5px;
     width: 100%;
     max-width: 400px;
     border: none;
     box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .register-formPanel h2 {
@@ -261,18 +289,42 @@
   .register-formPanel .alert {
     color: red;
     text-align: center;
+    margin-bottom: 10px;
   }
   
-  .register-formPanel .btn_asLink {
-    background: none;
-    border: none;
+  .register-formPanel .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .register-formPanel label {
+    display: block;
+    margin-bottom: 5px;
     color: #ffd700;
-    cursor: pointer;
-    text-decoration: underline;
+  }
+  
+  .register-formPanel input[type="text"],
+  .register-formPanel input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
     font-size: 1rem;
   }
   
-  .register-formPanel .btn_asLink:hover {
-    color: #e6c200;
+  .register-formPanel .btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffd700;
+    color: #1c1c1c;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-formPanel .btn:hover {
+    background-color: #e6c200;
   }
   

@@ -1,25 +1,49 @@
-// src/redux/sagas/user.saga.js
-import { put, takeLatest } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { FETCH_USER, SET_USER, UNSET_USER } from '../actions/types';
+import { FETCH_USER, SET_USER, UNSET_USER, LOGIN, REGISTER, LOGOUT } from '../actions/types';
 
-// worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
   try {
-    const response = yield axios.get('/api/user');
+    const response = yield call(axios.get, '/api/user');
     yield put({ type: SET_USER, payload: response.data });
   } catch (error) {
-    console.log('User get request failed', error);
-    if (error.response.status === 403) {
-      yield put({ type: UNSET_USER });
-      yield put({ type: 'REDIRECT', payload: '/login' });
-    }
+    console.error('User get request failed', error);
+    yield put({ type: UNSET_USER });
   }
 }
 
-// watcher Saga: spawns a new fetchUser task on each FETCH_USER
+function* loginUser(action) {
+  try {
+    yield call(axios.post, '/api/user/login', action.payload);
+    yield put({ type: FETCH_USER });
+  } catch (error) {
+    console.error('User login failed', error);
+  }
+}
+
+function* registerUser(action) {
+  try {
+    yield call(axios.post, '/api/user/register', action.payload);
+    yield put({ type: LOGIN, payload: { username: action.payload.username, password: action.payload.password } });
+  } catch (error) {
+    console.error('User registration failed', error);
+  }
+}
+
+function* logoutUser() {
+  try {
+    yield call(axios.post, '/api/user/logout');
+    yield put({ type: UNSET_USER });
+  } catch (error) {
+    console.error('User logout failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest(FETCH_USER, fetchUser);
+  yield takeLatest(LOGIN, loginUser);
+  yield takeLatest(REGISTER, registerUser);
+  yield takeLatest(LOGOUT, logoutUser);
 }
 
 export default userSaga;

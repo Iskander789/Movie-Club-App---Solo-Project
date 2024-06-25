@@ -15,8 +15,8 @@ function LoginForm() {
       dispatch({
         type: LOGIN,
         payload: {
-          username: username,
-          password: password,
+          username,
+          password,
         },
       });
     } else {
@@ -25,8 +25,13 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={login}>
-      <div>
+    <form className="login-formPanel" onSubmit={login}>
+      {errors.loginMessage && (
+        <h3 className="alert" role="alert">
+          {errors.loginMessage}
+        </h3>
+      )}
+      <div className="form-group">
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -36,7 +41,7 @@ function LoginForm() {
           onChange={(event) => setUsername(event.target.value)}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -46,8 +51,8 @@ function LoginForm() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      <div>
-        <input type="submit" name="submit" value="Log In" />
+      <div className="form-group">
+        <button type="submit" className="btn">Log In</button>
       </div>
     </form>
   );

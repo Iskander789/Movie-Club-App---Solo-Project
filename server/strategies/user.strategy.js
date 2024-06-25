@@ -8,38 +8,36 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  pool
-    .query('SELECT * FROM "user" WHERE id = $1', [id])
+  pool.query('SELECT * FROM "user" WHERE id = $1', [id])
     .then((result) => {
-      const user = result.rows[0];
+      const user = result && result.rows && result.rows[0];
       if (user) {
-        delete user.password; // remove password so it doesn't get sent
+        delete user.password; // Remove password from user object
         done(null, user);
       } else {
         done(null, null);
       }
     })
-    .catch((error) => {
-      done(error, null);
+    .catch((err) => {
+      console.error('Error with query during deserializing user', err);
+      done(err, null);
     });
 });
 
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    pool
-      .query('SELECT * FROM "user" WHERE username = $1', [username])
-      .then((result) => {
-        const user = result.rows[0];
-        if (user && encryptLib.comparePassword(password, user.password)) {
-          done(null, user);
-        } else {
-          done(null, false, { message: 'Incorrect username or password.' });
-        }
-      })
-      .catch((error) => {
-        done(error);
-      });
-  })
-);
+passport.use('local', new LocalStrategy((username, password, done) => {
+  pool.query('SELECT * FROM "user" WHERE username = $1', [username])
+    .then((result) => {
+      const user = result && result.rows && result.rows[0];
+      if (user && encryptLib.comparePassword(password, user.password)) {
+        done(null, user);
+      } else {
+        done(null, false, { message: 'Incorrect username or password' });
+      }
+    })
+    .catch((err) => {
+      console.error('Error with query for user', err);
+      done(err, null);
+    });
+}));
 
 module.exports = passport;

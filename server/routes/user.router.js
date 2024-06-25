@@ -57,8 +57,6 @@ router.put('/profile', rejectUnauthenticated, (req, res) => {
     });
 });
 
-
-
 // File upload setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -37,7 +37,7 @@ function App() {
     <div>
       <Nav />
       <Switch>
-        <Redirect exact from="/" to={user.id ? '/home' : '/landing'} />
+        <Redirect exact from="/" to={user.id ? '/home' : '/login'} />
         <ProtectedRoute exact path="/about">
           <AboutThisApp />
         </ProtectedRoute>

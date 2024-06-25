@@ -15,8 +15,8 @@ function RegisterForm() {
     dispatch({
       type: REGISTER,
       payload: {
-        username: username,
-        password: password,
+        username,
+        password,
       },
     });
 
@@ -32,7 +32,7 @@ function RegisterForm() {
   }, []);
 
   return (
-    <form className="formPanel" onSubmit={registerUser} autoComplete="off" key="registerForm">
+    <form className="register-form" onSubmit={registerUser} autoComplete="off" key="registerForm">
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
