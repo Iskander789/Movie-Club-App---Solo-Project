@@ -1,61 +1,42 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LOGIN } from '../../redux/actions/types';
-import './LoginForm.css';
 
-function LoginForm() {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const errors = useSelector((store) => store.errors);
 
-  const login = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    if (username && password) {
-      dispatch({
-        type: LOGIN,
-        payload: {
-          username,
-          password,
-        },
-      });
-    } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    }
+    dispatch({ type: LOGIN, payload: { username, password } });
   };
 
   return (
-    <form className="login-formPanel" onSubmit={login}>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div className="form-group">
+    <form onSubmit={handleSubmit}>
+      <div>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
-          name="username"
+          id="username"
           value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
-          onChange={(event) => setUsername(event.target.value)}
         />
       </div>
-      <div className="form-group">
+      <div>
         <label htmlFor="password">Password:</label>
         <input
           type="password"
-          name="password"
+          id="password"
           value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
-          onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      <div className="form-group">
-        <button type="submit" className="btn">Log In</button>
-      </div>
+      <button type="submit">Login</button>
     </form>
   );
-}
+};
 
 export default LoginForm;

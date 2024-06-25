@@ -27,10 +27,6 @@ function LandingRegistration() {
           <li>Rating and reviewing movies</li>
           <li>Getting recommendations based on your interests</li>
         </ul>
-        <p>Already a member? Log in to access your clubs and start discussing!</p>
-      </div>
-      <div className="register-formPanel">
-        <RegisterForm />
         <center>
           <button
             type="button"
@@ -39,9 +35,12 @@ function LandingRegistration() {
               history.push('/login');
             }}
           >
-            Already a Member? Log in
+            Already a user? Login here
           </button>
         </center>
+      </div>
+      <div className="register-formPanel">
+        <RegisterForm />
       </div>
     </div>
   );

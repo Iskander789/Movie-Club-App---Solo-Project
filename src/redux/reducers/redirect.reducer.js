@@ -1,6 +1,6 @@
-// Define action types
-const REDIRECT = 'REDIRECT';
-const CLEAR_REDIRECT = 'CLEAR_REDIRECT';
+// src/redux/reducers/redirect.reducer.js
+
+import { REDIRECT, CLEAR_REDIRECT } from '../actions/types';
 
 const redirectReducer = (state = '', action) => {
   switch (action.type) {

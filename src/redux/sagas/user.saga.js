@@ -1,53 +1,47 @@
-// src/redux/sagas/user.saga.js
-
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { FETCH_USER, SET_USER, UNSET_USER, LOGIN, REGISTER, LOGOUT } from '../actions/types';
-
-function* fetchUser() {
-  try {
-    const response = yield call(axios.get, '/api/user');
-    yield put({ type: SET_USER, payload: response.data });
-  } catch (error) {
-    console.error('User get request failed', error);
-    yield put({ type: UNSET_USER });
-  }
-}
+import { LOGIN, REGISTER, FETCH_USER, SET_USER, REDIRECT, REGISTRATION_FAILED, LOGIN_FAILED, UNSET_USER } from '../actions/types';
 
 function* loginUser(action) {
   try {
     yield call(axios.post, '/api/user/login', action.payload);
     yield put({ type: FETCH_USER });
+    yield put({ type: REDIRECT, payload: '/home' });
   } catch (error) {
-    console.error('User login failed', error);
+    console.log('Error logging in', error);
+    yield put({ type: LOGIN_FAILED, payload: 'Login failed. Please try again.' });
   }
 }
 
 function* registerUser(action) {
   try {
     yield call(axios.post, '/api/user/register', action.payload);
-    if (action.callback) {
-      action.callback();
-    }
+    yield put({ type: SET_USER, payload: action.payload });
+    yield put({ type: REDIRECT, payload: '/login' });
   } catch (error) {
-    console.error('User registration failed', error);
+    console.log('Error registering user', error);
+    if (error.response.status === 409) {
+      yield put({ type: REGISTRATION_FAILED, payload: 'Username already taken' });
+    } else {
+      yield put({ type: REGISTRATION_FAILED, payload: 'Registration failed. Please try again.' });
+    }
   }
 }
 
-function* logoutUser() {
+function* fetchUser() {
   try {
-    yield call(axios.post, '/api/user/logout');
-    yield put({ type: UNSET_USER });
+    const response = yield call(axios.get, '/api/user');
+    yield put({ type: SET_USER, payload: response.data });
   } catch (error) {
-    console.error('User logout failed', error);
+    console.log('User get request failed', error);
+    yield put({ type: UNSET_USER });
   }
 }
 
 function* userSaga() {
-  yield takeLatest(FETCH_USER, fetchUser);
   yield takeLatest(LOGIN, loginUser);
   yield takeLatest(REGISTER, registerUser);
-  yield takeLatest(LOGOUT, logoutUser);
+  yield takeLatest(FETCH_USER, fetchUser);
 }
 
 export default userSaga;

@@ -12,14 +12,13 @@ passport.deserializeUser((id, done) => {
     .then((result) => {
       const user = result && result.rows && result.rows[0];
       if (user) {
-        delete user.password; // Remove password from user object
         done(null, user);
       } else {
-        done(null, null);
+        done(null, false);
       }
     })
     .catch((err) => {
-      console.error('Error with query during deserializing user', err);
+      console.error('Error when selecting user on session deserialize', err);
       done(err, null);
     });
 });
@@ -31,11 +30,11 @@ passport.use('local', new LocalStrategy((username, password, done) => {
       if (user && encryptLib.comparePassword(password, user.password)) {
         done(null, user);
       } else {
-        done(null, false, { message: 'Incorrect username or password' });
+        done(null, false, { message: 'Incorrect username or password.' });
       }
     })
     .catch((err) => {
-      console.error('Error with query for user', err);
+      console.error('Error when selecting user on login', err);
       done(err, null);
     });
 }));

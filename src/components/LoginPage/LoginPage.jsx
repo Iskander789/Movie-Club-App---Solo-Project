@@ -23,7 +23,7 @@ function LoginPage() {
             type="button"
             className="btn_asLink"
             onClick={() => {
-              history.push('/landing');
+              history.push('/');
             }}
           >
             Register

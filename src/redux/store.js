@@ -1,15 +1,15 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+// src/redux/store.js
+import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './reducers/_root.reducer'; // imports ./redux/reducers/index.js
-import rootSaga from './sagas/_root.saga'; // imports ./redux/sagas/index.js
+import logger from 'redux-logger';
+import rootReducer from './reducers/_root.reducer'; // Import the root reducer
+import rootSaga from './sagas/_root.saga'; // Import the root saga
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewareList = applyMiddleware(sagaMiddleware);
-
 const store = createStore(
   rootReducer,
-  middlewareList,
+  applyMiddleware(sagaMiddleware, logger)
 );
 
 sagaMiddleware.run(rootSaga);
