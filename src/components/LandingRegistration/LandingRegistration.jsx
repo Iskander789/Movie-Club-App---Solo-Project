@@ -1,75 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { REGISTER } from '../../redux/actions/types';
+import RegisterForm from '../RegisterForm/RegisterForm';
 import './LandingRegistration.css';
 
 function LandingRegistration() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const errors = useSelector((store) => store.errors);
+  const user = useSelector((store) => store.user);
   const history = useHistory();
 
-  const registerUser = (event) => {
-    event.preventDefault();
-    dispatch({
-      type: REGISTER,
-      payload: {
-        username,
-        password,
-      },
-      callback: () => history.push('/login')  // Navigate to login after successful registration
-    });
-  };
-
   useEffect(() => {
-    setUsername('');
-    setPassword('');
-  }, []);
+    if (user.id) {
+      history.push('/home');
+    }
+  }, [user.id, history]);
 
   return (
     <div className="landing-container">
-      <div className="formPanel">
-        <h2>Register User</h2>
-        {errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {errors.registrationMessage}
-          </h3>
-        )}
-        <form onSubmit={registerUser}>
-          <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              required
-              onChange={(event) => setUsername(event.target.value)}
-              autoComplete="new-username"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              required
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="new-password"
-            />
-          </div>
-          <div className="form-group">
-            <input className="btn" type="submit" name="submit" value="Register" />
-          </div>
-        </form>
-        <div className="login-section">
-          <p>Already a Member?</p>
-          <button type="button" className="btn_asLink" onClick={() => history.push('/login')}>
-            Login
+      <div className="landing-content">
+        <h1>Welcome to Movie Club</h1>
+        <p>Welcome to Movie Club, the place where movie enthusiasts come together to share their passion for films.</p>
+        <p>Create an account, join up to four different clubs, and start discussing your favorite movies today!</p>
+        <p>Features include:</p>
+        <ul>
+          <li>Joining multiple movie clubs</li>
+          <li>Participating in discussions</li>
+          <li>Rating and reviewing movies</li>
+          <li>Getting recommendations based on your interests</li>
+        </ul>
+        <p>Already a member? Log in to access your clubs and start discussing!</p>
+      </div>
+      <div className="register-formPanel">
+        <RegisterForm />
+        <center>
+          <button
+            type="button"
+            className="btn_asLink"
+            onClick={() => {
+              history.push('/login');
+            }}
+          >
+            Already a Member? Log in
           </button>
-        </div>
+        </center>
       </div>
     </div>
   );

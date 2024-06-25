@@ -13,88 +13,93 @@ html, body {
   color: #f0f0f0;
 }
 
-/* Container */
 .landing-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   min-height: 100vh;
-  background-color: #1c1c1c;
-  margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 
-.formPanel {
-  background-color: #2a2a2a; /* Inner rectangle color */
-  padding: 30px; /* Increased padding */
-  border-radius: 10px; /* Rounded corners */
+.landing-content {
+  max-width: 600px;
+}
+
+.landing-content h1 {
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.landing-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.landing-content ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.register-formPanel {
+  background-color: #2a2a2a; /* Differentiate the panel from the background */
+  padding: 20px;
+  border-radius: 5px;
   width: 100%;
   max-width: 400px;
-  border: 2px solid #ffd700; /* Border for inner rectangle */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced box shadow */
+  border: none;
   box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.register-formPanel h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #ffd700;
-  font-size: 24px; /* Increased font size */
 }
 
-.alert {
+.register-formPanel .alert {
   color: red;
   text-align: center;
-  margin-bottom: 20px; /* Added space below alert */
+  margin-bottom: 10px;
 }
 
-label {
-  color: #f2f2f2;
-  font-size: 14px; /* Updated font size */
+.register-formPanel .form-group {
+  margin-bottom: 15px;
+}
+
+.register-formPanel label {
   display: block;
-  margin-bottom: 8px; /* Added margin for better spacing */
+  margin-bottom: 5px;
+  color: #ffd700;
 }
 
-.form-group {
-  margin-bottom: 20px; /* Ensure space between input fields */
-}
-
-input[type="text"],
-input[type="password"] {
+.register-formPanel input[type="text"],
+.register-formPanel input[type="password"] {
   width: 100%;
-  padding: 12px; /* Increased padding */
-  margin-bottom: 10px; /* Increased margin for better spacing */
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  background-color: #333;
-  color: #f2f2f2;
-  font-size: 14px; /* Updated font size */
+  font-size: 1rem;
 }
 
-input[type="submit"],
-.btn {
-  display: block;
+.register-formPanel .btn {
   width: 100%;
-  padding: 12px; /* Increased padding */
-  background-color: #ffd700;
-  color: #1c1c1c;
+  padding: 10px;
   border: none;
   border-radius: 4px;
+  background-color: #ffd700;
+  color: #1c1c1c;
+  font-size: 16px;
   cursor: pointer;
-  text-align: center;
-  font-size: 16px; /* Updated font size */
-  margin-top: 10px; /* Added margin for spacing */
+  transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover,
-.btn:hover {
-  background-color: #e5c100;
-}
-
-.login-section {
-  text-align: center;
-  margin-top: 20px; /* Ensure space between register and login sections */
+.register-formPanel .btn:hover {
+  background-color: #e6c200;
 }
 
 .btn_asLink {
@@ -103,9 +108,10 @@ input[type="submit"]:hover,
   color: #ffd700;
   cursor: pointer;
   text-decoration: underline;
-  font-size: 14px; /* Updated font size */
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
 .btn_asLink:hover {
-  color: #e5c100;
+  color: #e6c200;
 }

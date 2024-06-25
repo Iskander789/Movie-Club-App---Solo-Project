@@ -1,49 +1,92 @@
+/* Register Form Styling */
+.register-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1c1c1c;
+  margin: 0;
+  padding: 0;
+}
+
 .formPanel {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 400px;
-    padding: 25px;
-    margin: 20px auto;
-    background-color: #2a2a2a;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: #f2f2f2;
-    text-align: left; /* Ensure text is aligned to the left */
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #333;
-    color: #f2f2f2;
-    text-align: left; /* Ensure input text is aligned to the left */
-  }
-  
-  input[type="submit"],
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #ffd700;
-    color: #1c1c1c;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  input[type="submit"]:hover,
-  .btn:hover {
-    background-color: #e5c100;
-  }
-  
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.formPanel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.formPanel .alert {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  color: #ffd700;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #333;
+  color: #f0f0f0;
+}
+
+.form-group input[type="submit"],
+.form-group .btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffd700;
+  color: #1c1c1c;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-group input[type="submit"]:hover,
+.form-group .btn:hover {
+  background-color: #e6c200;
+}
+
+.form-group .btn_asLink {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #ffd700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-group .btn_asLink:hover {
+  color: #e6c200;
+}

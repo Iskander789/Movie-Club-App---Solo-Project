@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER } from '../../redux/actions/types';
+import { useHistory } from 'react-router-dom';
 import './RegisterForm.css';
 
 function RegisterForm() {
@@ -8,6 +9,7 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -15,8 +17,8 @@ function RegisterForm() {
     dispatch({
       type: REGISTER,
       payload: {
-        username,
-        password,
+        username: username,
+        password: password,
       },
     });
 
@@ -32,39 +34,50 @@ function RegisterForm() {
   }, []);
 
   return (
-    <form className="register-form" onSubmit={registerUser} autoComplete="off" key="registerForm">
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          required
-          onChange={(event) => setUsername(event.target.value)}
-          autoComplete="new-username"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          required
-          onChange={(event) => setPassword(event.target.value)}
-          autoComplete="new-password"
-        />
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+    <div className="register-form-container">
+      <form className="formPanel" onSubmit={registerUser} autoComplete="off" key="registerForm">
+        <h2>Register User</h2>
+        {errors.registrationMessage && (
+          <h3 className="alert" role="alert">
+            {errors.registrationMessage}
+          </h3>
+        )}
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+            autoComplete="new-username"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            required
+            onChange={(event) => setPassword(event.target.value)}
+            autoComplete="new-password"
+          />
+        </div>
+        <div className="form-group">
+          <input className="btn" type="submit" name="submit" value="Register" />
+        </div>
+        <div className="form-group">
+          <button
+            type="button"
+            className="btn_asLink"
+            onClick={() => history.push('/login')}
+          >
+            Already a Member? Log in
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
