@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { FETCH_USER, CLEAR_REDIRECT } from '../../redux/actions/types';
+import Nav from '../Nav/Nav'; // Ensure Nav is imported
 import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserPage from '../UserPage/UserPage';
@@ -26,6 +27,7 @@ function App() {
   return (
     <Router>
       {redirect && <Redirect to={redirect} />}
+      <Nav /> {/* Ensure Nav is included */}
       <Switch>
         <Route exact path="/" component={LandingRegistration} />
         <Route exact path="/login" component={LoginPage} />

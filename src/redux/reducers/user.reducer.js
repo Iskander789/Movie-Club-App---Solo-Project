@@ -1,17 +1,19 @@
 import {
   SET_USER,
   UNSET_USER,
-  LOGIN,
   LOGIN_FAILED,
-  REGISTER,
   REGISTRATION_FAILED,
   REDIRECT,
   CLEAR_REDIRECT,
-  FETCH_USER,
 } from '../actions/types';
 
 const initialState = {
-  user: {},
+  id: null,
+  username: '',
+  email: '',
+  profile_picture: '',
+  group_name: '',
+  is_leader: false,
   errors: {
     loginMessage: '',
     registrationMessage: '',
@@ -24,13 +26,10 @@ const userReducer = (state = initialState, action) => {
     case SET_USER:
       return {
         ...state,
-        user: action.payload,
+        ...action.payload,
       };
     case UNSET_USER:
-      return {
-        ...state,
-        user: {},
-      };
+      return initialState;
     case LOGIN_FAILED:
       return {
         ...state,

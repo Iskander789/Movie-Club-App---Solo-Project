@@ -10,6 +10,9 @@ function Nav() {
 
   const isLoggedIn = Boolean(user.id);
 
+  console.log("User:", user); // Add this line to log the user state
+  console.log("Is Logged In:", isLoggedIn); // Add this line to check the login status
+
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
   };
