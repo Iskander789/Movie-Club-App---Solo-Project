@@ -42,7 +42,7 @@ function Nav() {
           </ul>
           <ul>
             <li>
-              <Link to="/landing" className="navLink" onClick={handleLogout}>Log Out</Link>
+              <Link to="/login" className="navLink" onClick={handleLogout}>Log Out</Link>
             </li>
           </ul>
         </div>

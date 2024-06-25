@@ -7,6 +7,9 @@ import LandingRegistration from '../LandingRegistration/LandingRegistration';
 import LoginPage from '../LoginPage/LoginPage';
 import UserPage from '../UserPage/UserPage';
 import GroupsPage from '../GroupsPage/GroupsPage';
+import UserProfile from '../UserProfile/UserProfile';
+import AboutThisApp from '../AboutThisApp/AboutThisApp';
+import TechnologiesUsed from '../TechnologiesUsed/TechnologiesUsed';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -42,6 +45,9 @@ function App() {
         <Route exact path="/login" component={LoginPage} />
         <ProtectedRoute exact path="/home" component={UserPage} />
         <ProtectedRoute exact path="/groups" component={GroupsPage} />
+        <ProtectedRoute exact path="/profile" component={UserProfile} />
+        <ProtectedRoute exact path="/about" component={AboutThisApp} />
+        <ProtectedRoute exact path="/technologies-used" component={TechnologiesUsed} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>
