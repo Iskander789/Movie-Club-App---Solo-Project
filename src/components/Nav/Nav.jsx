@@ -24,25 +24,47 @@ function Nav() {
       {isLoggedIn && (
         <div className="nav-links-container">
           <ul>
-            <li>
-              <Link to="/home" className={`navLink ${location.pathname === '/home' ? 'active' : ''}`}>Home</Link>
-            </li>
-            <li>
-              <Link to="/groups" className={`navLink ${location.pathname === '/groups' ? 'active' : ''}`}>Groups</Link>
-            </li>
-            <li>
-              <Link to="/profile" className={`navLink ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-            </li>
-            <li>
-              <Link to="/about" className={`navLink ${location.pathname === '/about' ? 'active' : ''}`}>About This App</Link>
-            </li>
-            <li>
-              <Link to="/technologies-used" className={`navLink ${location.pathname === '/technologies-used' ? 'active' : ''}`}>Technologies Used</Link>
-            </li>
+            {location.pathname !== '/home' && (
+              <li>
+                <Link to="/home" className={`navLink ${location.pathname === '/home' ? 'active' : ''}`}>
+                  Home
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/groups' && (
+              <li>
+                <Link to="/groups" className={`navLink ${location.pathname === '/groups' ? 'active' : ''}`}>
+                  Groups
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/profile' && (
+              <li>
+                <Link to="/profile" className={`navLink ${location.pathname === '/profile' ? 'active' : ''}`}>
+                  Profile
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/about' && (
+              <li>
+                <Link to="/about" className={`navLink ${location.pathname === '/about' ? 'active' : ''}`}>
+                  About This App
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/technologies-used' && (
+              <li>
+                <Link to="/technologies-used" className={`navLink ${location.pathname === '/technologies-used' ? 'active' : ''}`}>
+                  Technologies Used
+                </Link>
+              </li>
+            )}
           </ul>
           <ul>
             <li>
-              <Link to="/login" className="navLink" onClick={handleLogout}>Log Out</Link>
+              <Link to="/login" className="navLink" onClick={handleLogout}>
+                Log Out
+              </Link>
             </li>
           </ul>
         </div>

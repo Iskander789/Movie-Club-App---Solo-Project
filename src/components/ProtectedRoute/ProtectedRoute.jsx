@@ -12,7 +12,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
         user.id ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/" /> // Redirect to landing page if not authenticated
         )
       }
     />
