@@ -113,12 +113,11 @@ function* updateGroupSaga(action) {
   try {
     yield call(axios.put, `/api/groups/${action.payload.groupId}`, action.payload.groupData);
     yield put({ type: FETCH_GROUP_DETAILS, payload: action.payload.groupId });
-    yield put({ type: FETCH_GROUPS });
-    yield put({ type: FETCH_OTHER_GROUPS });
+    yield put({ type: SET_SUCCESS_MESSAGE, payload: 'Group update was successful!' });
   } catch (error) {
     console.error('Error updating group:', error);
     if (error.response && error.response.data && error.response.data.error) {
-      yield put({ type: SET_ERROR, payload: error.response.data.error });
+      yield put({ type: SET_ERROR_MESSAGE, payload: error.response.data.error });
     }
   }
 }
@@ -129,15 +128,17 @@ function* deleteGroupSaga(action) {
     yield call(axios.delete, `/api/groups/${action.payload}`);
     yield put({ type: FETCH_GROUPS });
     yield put({ type: FETCH_OTHER_GROUPS });
+    yield put({ type: SET_REDIRECT, payload: '/groups' }); // Redirect to /groups
+    yield put({ type: SET_SUCCESS_MESSAGE, payload: 'Group deletion was successful!' });
   } catch (error) {
     console.error('Error deleting group:', error);
     if (error.response && error.response.data && error.response.data.error) {
-      yield put({ type: SET_ERROR, payload: error.response.data.error });
+      yield put({ type: SET_ERROR_MESSAGE, payload: error.response.data.error });
     }
   }
 }
 
-function* groupSaga() {
+export default function* groupSaga() {
   yield takeLatest(FETCH_GROUPS, fetchGroupsSaga);
   yield takeLatest(FETCH_OTHER_GROUPS, fetchOtherGroupsSaga);
   yield takeLatest(CREATE_GROUP, createGroupSaga);
@@ -148,5 +149,3 @@ function* groupSaga() {
   yield takeLatest(UPDATE_GROUP, updateGroupSaga);
   yield takeLatest(DELETE_GROUP, deleteGroupSaga);
 }
-
-export default groupSaga;

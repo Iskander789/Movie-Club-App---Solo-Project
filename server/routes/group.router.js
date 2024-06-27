@@ -140,6 +140,22 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+// Route to update a group
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+    const groupId = req.params.id;
+    const { name, description } = req.body;
+    const queryText = `UPDATE groups SET name = $1, description = $2 WHERE id = $3 RETURNING *`;
+    pool.query(queryText, [name, description, groupId])
+        .then((result) => {
+            console.log('Group updated:', result.rows[0]);
+            res.send(result.rows[0]);
+        })
+        .catch((error) => {
+            console.error('Error updating group:', error);
+            res.sendStatus(500);
+        });
+});
+
 // Route to add a group member
 router.post('/:groupId/members', rejectUnauthenticated, (req, res) => {
     const { groupId } = req.params;

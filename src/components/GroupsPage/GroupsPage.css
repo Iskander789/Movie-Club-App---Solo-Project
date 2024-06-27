@@ -10,16 +10,22 @@
 
 .groups-page-container h2 {
   color: #ffd700;
+  margin-bottom: 20px;
+  font-size: 1.8em;
 }
 
 .groups-page-container .btn {
-  padding: 10px 20px;
+  display: inline-block;
+  padding: 12px 24px;
   margin-bottom: 20px;
   border: none;
   border-radius: 4px;
   background-color: #ffd700;
   color: #1c1c1c;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .groups-page-container .btn:hover {
@@ -28,28 +34,42 @@
 
 .groups-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
 .group-card {
-  padding: 15px;
+  flex: 1 1 calc(33.333% - 30px);
   background-color: #3a3a3a;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s ease;
 }
 
 .group-card:hover {
+  transform: translateY(-5px);
   background-color: #4a4a4a;
 }
 
 .group-card h3 {
   margin: 0 0 10px;
   color: #ffd700;
+  font-size: 1.5em;
 }
 
 .group-card p {
   margin: 0;
   color: #f0f0f0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.groups-list > p {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-top: 20px;
 }

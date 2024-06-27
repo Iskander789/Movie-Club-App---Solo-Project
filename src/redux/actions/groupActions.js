@@ -11,7 +11,8 @@ import {
   SET_GROUP_MEMBERS,
   UPDATE_GROUP,
   DELETE_GROUP,
-  CLEAR_REDIRECT
+  CLEAR_REDIRECT,
+  SET_GROUP_DETAILS
 } from './types';
 
 export const fetchGroups = () => ({ type: FETCH_GROUPS });

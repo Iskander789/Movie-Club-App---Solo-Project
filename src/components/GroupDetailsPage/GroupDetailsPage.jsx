@@ -27,7 +27,8 @@ function GroupDetailsPage() {
     }
   }, [groupDetails]);
 
-  const handleUpdate = () => {
+  const handleUpdate = (e) => {
+    e.preventDefault();
     dispatch(updateGroup(id, { name: groupName, description: groupDescription }));
     setEditing(false);
   };
@@ -42,19 +43,25 @@ function GroupDetailsPage() {
       {groupDetails ? (
         <>
           {editing ? (
-            <>
-              <input
-                type="text"
-                value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}
-              />
-              <textarea
-                value={groupDescription}
-                onChange={(e) => setGroupDescription(e.target.value)}
-              />
-              <button onClick={handleUpdate} className="btn btn-primary">Save</button>
-              <button onClick={() => setEditing(false)} className="btn btn-secondary">Cancel</button>
-            </>
+            <form onSubmit={handleUpdate}>
+              <div>
+                <label>Group Name:</label>
+                <input
+                  type="text"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>Group Description:</label>
+                <textarea
+                  value={groupDescription}
+                  onChange={(e) => setGroupDescription(e.target.value)}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Save</button>
+              <button type="button" className="btn btn-secondary" onClick={() => setEditing(false)}>Cancel</button>
+            </form>
           ) : (
             <>
               <h2>{groupDetails.name}</h2>

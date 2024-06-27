@@ -1,39 +1,44 @@
+/* src/components/GroupDetailsPage/GroupDetailsPage.css */
+
 .group-details-container {
-    padding: 20px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .group-details-container h2 {
-    color: #ffd700;
-  }
-  
-  .group-details-container p {
-    color: #f0f0f0;
-  }
-  
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #3a3a3a;
-    color: #f0f0f0;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ffd700;
-    color: #1c1c1c;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #e6c200;
-  }
-  
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.group-name {
+  font-size: 24px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.group-details-container h2,
+.group-details-container p {
+  color: #f0f0f0;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #3a3a3a;
+  color: #f0f0f0;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffd700;
+  color: #1c1c1c;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e6c200;
+}

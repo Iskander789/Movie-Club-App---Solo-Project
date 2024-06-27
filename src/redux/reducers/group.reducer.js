@@ -1,3 +1,5 @@
+// src/redux/reducers/group.reducer.js
+
 import {
   FETCH_GROUPS,
   SET_GROUPS,
